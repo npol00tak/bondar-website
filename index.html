@@ -10,12 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* === Theme palette (defaults: day + summer) === */
     --bg: #F7F5F0;
     --bg-soft: #EFEBE2;
     --bg-card: #FFFFFF;
     --green: #3B6B4E;
     --green-dark: #2E5640;
     --green-soft: #E5EDE7;
+    --accent: #3B6B4E;
     --gold: #C4955A;
     --gold-soft: #F0E4D2;
     --text: #2A2A28;
@@ -25,6 +27,170 @@
     --shadow-lg: 0 20px 50px rgba(60, 50, 30, 0.12);
     --radius: 18px;
     --radius-sm: 10px;
+    --hero-blob-1: rgba(196, 149, 90, 0.12);
+    --hero-blob-2: rgba(59, 107, 78, 0.10);
+
+    /* === House SVG palette === */
+    --hb-sky-top: #84BBDF;
+    --hb-sky-bottom: #D4EAF5;
+    --hb-sun: #FFD557;
+    --hb-sun-glow-in: rgba(255, 213, 87, 0.45);
+    --hb-sun-glow-out: rgba(255, 213, 87, 0);
+    --hb-stars-opacity: 0;
+    --hb-moon-craters-opacity: 0;
+    --hb-hills: #95B89E;
+    --hb-lawn-near: #6FA651;
+    --hb-lawn-far: #5C8E45;
+    --hb-tree-leaves: #4F8E45;
+    --hb-tree-leaves-opacity: 1;
+    --hb-tree-bare-opacity: 0;
+    --hb-tree-trunk: #6B4A2E;
+    --hb-bush: #4F8E45;
+    --hb-wall: #E8DCC4;
+    --hb-roof: #8C5238;
+    --hb-roof-shade: #A8624A;
+    --hb-chimney: #B47659;
+    --hb-chimney-top: #8C5238;
+    --hb-snow-roof-opacity: 0;
+    --hb-snow-chimney-opacity: 0;
+    --hb-smoke-opacity: 0;
+    --hb-window-frame: #6B4A2E;
+    --hb-window-glow: #B8D4F0;
+    --hb-window-glow-opacity: 0.55;
+    --hb-window-cross: #6B4A2E;
+    --hb-door: #5C3A1F;
+    --hb-door-knob: #C4955A;
+    --hb-path: #D4B98A;
+    --hb-path-shade: #B89A6E;
+    --hb-fence: #A89070;
+    --hb-flowers-opacity: 0;
+    --hb-flower-petal: #FF6B9D;
+    --hb-flower-center: #FFD93D;
+    --hb-fallen-leaves-opacity: 0;
+    --hb-fallen-leaf: #C97B3A;
+    --hb-snow-extras-opacity: 0;
+    --hb-snow-extras: #F8FAFC;
+
+    --hero-bg-opacity: 0.35;
+    --nav-bg: rgba(247, 245, 240, 0.85);
+    --text-card-bg: rgba(247, 245, 240, 0.65);
+    --text-card-border: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ===== Seasons (applied first) ===== */
+  body.season-spring {
+    --hb-lawn-near: #82C46B;
+    --hb-lawn-far: #6BAA50;
+    --hb-tree-leaves: #79B47A;
+    --hb-bush: #79B47A;
+    --hb-flowers-opacity: 1;
+  }
+  body.season-summer {
+    --hb-lawn-near: #6FA651;
+    --hb-lawn-far: #5C8E45;
+    --hb-tree-leaves: #4F8E45;
+    --hb-bush: #4F8E45;
+  }
+  body.season-autumn {
+    --hb-lawn-near: #A89052;
+    --hb-lawn-far: #8C7635;
+    --hb-tree-leaves: #C8742A;
+    --hb-bush: #8C7635;
+    --hb-fallen-leaves-opacity: 1;
+  }
+  body.season-winter {
+    --hb-lawn-near: #F4F8FB;
+    --hb-lawn-far: #DCE3EA;
+    --hb-tree-leaves-opacity: 0;
+    --hb-tree-bare-opacity: 1;
+    --hb-tree-trunk: #4A382A;
+    --hb-bush: #BFC8D0;
+    --hb-snow-roof-opacity: 1;
+    --hb-snow-chimney-opacity: 1;
+    --hb-smoke-opacity: 0.55;
+    --hb-snow-extras-opacity: 1;
+  }
+
+  /* ===== Time of day (applied second, overrides season for atmosphere) ===== */
+  body.time-morning {
+    --bg: #FAF3EE;
+    --bg-soft: #F5E8DD;
+    --nav-bg: rgba(250, 243, 238, 0.85);
+    --hero-blob-1: rgba(255, 179, 122, 0.18);
+    --hero-blob-2: rgba(255, 200, 176, 0.12);
+    --hb-sky-top: #FFC8B0;
+    --hb-sky-bottom: #FDE5D4;
+    --hb-sun: #FFB37A;
+    --hb-sun-glow-in: rgba(255, 179, 122, 0.5);
+    --hb-window-glow: #FFD4B0;
+    --hb-window-glow-opacity: 0.4;
+  }
+  /* time-day uses :root defaults */
+  body.time-evening {
+    --bg: #F2E9DD;
+    --bg-soft: #E8DCC8;
+    --nav-bg: rgba(242, 233, 221, 0.85);
+    --hero-blob-1: rgba(255, 122, 74, 0.18);
+    --hero-blob-2: rgba(107, 73, 134, 0.15);
+    --hb-sky-top: #6B4986;
+    --hb-sky-bottom: #FF8C5A;
+    --hb-sun: #FF7A4A;
+    --hb-sun-glow-in: rgba(255, 122, 74, 0.45);
+    --hb-hills: #5A6E62;
+    --hb-window-glow: #FFD580;
+    --hb-window-glow-opacity: 0.95;
+  }
+  body.time-night {
+    --bg: #1C2420;
+    --bg-soft: #232B27;
+    --bg-card: #252E29;
+    --nav-bg: rgba(28, 36, 32, 0.85);
+    --text-card-bg: rgba(28, 36, 32, 0.65);
+    --text-card-border: rgba(255, 255, 255, 0.08);
+    --green: #5B9476;
+    --green-dark: #4A7C60;
+    --green-soft: #2A3530;
+    --accent: #7CB496;
+    --gold: #D4A878;
+    --gold-soft: #2F2A1F;
+    --text: #E4DDD4;
+    --text-soft: #A8A199;
+    --line: #2F3833;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --hero-blob-1: rgba(212, 168, 120, 0.10);
+    --hero-blob-2: rgba(91, 148, 118, 0.10);
+    --hb-sky-top: #0B1428;
+    --hb-sky-bottom: #1F2A4A;
+    --hb-sun: #F0EBD8;
+    --hb-sun-glow-in: rgba(240, 235, 216, 0.25);
+    --hb-stars-opacity: 1;
+    --hb-moon-craters-opacity: 0.22;
+    --hb-hills: #14202C;
+    --hb-lawn-near: #2A4035;
+    --hb-lawn-far: #1F302A;
+    --hb-tree-trunk: #1F1813;
+    --hb-wall: #5A4D3D;
+    --hb-roof: #3B2A20;
+    --hb-roof-shade: #4A3528;
+    --hb-chimney: #5A4030;
+    --hb-chimney-top: #3B2A20;
+    --hb-window-glow: #FFE08A;
+    --hb-window-glow-opacity: 1;
+    --hb-window-frame: #3B2A20;
+    --hb-window-cross: #3B2A20;
+    --hb-door: #3B2A20;
+    --hb-path: #4A4035;
+    --hb-path-shade: #38302A;
+    --hb-fence: #4A4035;
+    --hero-bg-opacity: 0.45;
+  }
+  /* Winter night: keep snow & bare trees readable on dark bg */
+  body.season-winter.time-night {
+    --hb-lawn-near: #4F5C66;
+    --hb-lawn-far: #353F47;
+    --hb-bush: #6A7682;
+    --hb-snow-extras: #BFCEDB;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +207,9 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     margin: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
+  h1, h2, h3, h4, .logo, .step-num, .hero-stat-num, .example-card-value, .contact-avatar { transition: color 0.5s ease; }
 
   h1, h2, h3, h4 {
     font-family: 'Playfair Display', serif;
@@ -50,7 +218,7 @@
     color: var(--text);
   }
 
-  h1 { font-size: clamp(2.4rem, 5.5vw, 4.5rem); letter-spacing: -0.02em; }
+  h1 { font-size: clamp(2rem, 4.5vw, 3.5rem); letter-spacing: -0.02em; }
   h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.01em; }
   h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); }
 
@@ -67,11 +235,11 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(247, 245, 240, 0.85);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease, background 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.5s ease;
   }
   .nav.scrolled { border-bottom-color: var(--line); }
   .nav-inner {
@@ -204,34 +372,139 @@
 
   /* ===== Hero ===== */
   .hero {
-    padding: 160px 0 100px;
+    height: 100vh;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
   }
   .hero::before {
     content: '';
     position: absolute;
     top: -200px; right: -200px;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(196, 149, 90, 0.12), transparent 70%);
+    background: radial-gradient(circle, var(--hero-blob-1), transparent 70%);
     border-radius: 50%;
     z-index: 0;
+    pointer-events: none;
+    transition: background 0.5s ease;
   }
   .hero::after {
     content: '';
     position: absolute;
     bottom: -300px; left: -200px;
     width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(59, 107, 78, 0.10), transparent 70%);
+    background: radial-gradient(circle, var(--hero-blob-2), transparent 70%);
     border-radius: 50%;
     z-index: 0;
+    pointer-events: none;
+    transition: background 0.5s ease;
   }
+  .hero-house-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  .hero-house-bg * {
+    transition: fill 0.5s ease, stroke 0.5s ease, stop-color 0.5s ease, opacity 0.5s ease;
+  }
+  .hb-sky-top-stop { stop-color: var(--hb-sky-top); }
+  .hb-sky-bottom-stop { stop-color: var(--hb-sky-bottom); }
+  .hb-lawn-near-stop { stop-color: var(--hb-lawn-near); }
+  .hb-lawn-far-stop { stop-color: var(--hb-lawn-far); }
+  .hb-sun-glow-in-stop { stop-color: var(--hb-sun-glow-in); }
+  .hb-sun-glow-out-stop { stop-color: var(--hb-sun-glow-out); }
+  .hb-stars { fill: #FFFEF7; opacity: var(--hb-stars-opacity); }
+  .hb-sun { fill: var(--hb-sun); }
+  .hb-moon-craters { fill: rgba(0,0,0,0.18); opacity: var(--hb-moon-craters-opacity); }
+  .hb-hills { fill: var(--hb-hills); opacity: 0.55; }
+  .hb-tree-trunk { fill: var(--hb-tree-trunk); }
+  .hb-tree-leaves { fill: var(--hb-tree-leaves); }
+  .hb-tree-leaves-group { opacity: var(--hb-tree-leaves-opacity); }
+  .hb-tree-bare { stroke: var(--hb-tree-trunk); fill: none; opacity: var(--hb-tree-bare-opacity); stroke-linecap: round; }
+  .hb-bush { fill: var(--hb-bush); }
+  .hb-wall { fill: var(--hb-wall); }
+  .hb-roof { fill: var(--hb-roof); }
+  .hb-roof-shade { fill: var(--hb-roof-shade); opacity: 0.45; }
+  .hb-chimney { fill: var(--hb-chimney); }
+  .hb-chimney-top { fill: var(--hb-chimney-top); }
+  .hb-snow-roof { fill: #F8FAFC; opacity: var(--hb-snow-roof-opacity); }
+  .hb-snow-chimney { fill: #F8FAFC; opacity: var(--hb-snow-chimney-opacity); }
+  .hb-smoke { fill: #E0DDD5; opacity: var(--hb-smoke-opacity); }
+  .hb-door { fill: var(--hb-door); }
+  .hb-door-knob { fill: var(--hb-door-knob); }
+  .hb-window-frame { fill: var(--hb-window-frame); }
+  .hb-window-glow { fill: var(--hb-window-glow); opacity: var(--hb-window-glow-opacity); }
+  .hb-window-cross { stroke: var(--hb-window-cross); stroke-width: 2; }
+  .hb-path { fill: var(--hb-path); }
+  .hb-path-shade { fill: var(--hb-path-shade); opacity: 0.5; }
+  .hb-fence-rail, .hb-fence-post { fill: var(--hb-fence); }
+  .hb-flowers { opacity: var(--hb-flowers-opacity); }
+  .hb-flower-petal { fill: var(--hb-flower-petal); }
+  .hb-flower-center { fill: var(--hb-flower-center); }
+  .hb-fallen-leaves { opacity: var(--hb-fallen-leaves-opacity); }
+  .hb-fallen-leaves ellipse { fill: var(--hb-fallen-leaf); }
+  .hb-snow-extras { fill: var(--hb-snow-extras); opacity: var(--hb-snow-extras-opacity); }
+  @keyframes hb-twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .hb-stars circle:nth-child(odd) { animation: hb-twinkle 3.5s ease-in-out infinite; }
+  .hb-stars circle:nth-child(3n) { animation: hb-twinkle 5s ease-in-out infinite 1s; }
+  .hb-stars circle:nth-child(5n) { animation: hb-twinkle 4.5s ease-in-out infinite 0.5s; }
+
+  /* ===== Theme toggle button ===== */
+  .theme-toggle {
+    background: var(--bg-soft);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-soft);
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .theme-toggle:hover {
+    background: var(--green-soft);
+    color: var(--green);
+    transform: rotate(20deg);
+  }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  body.time-night .theme-toggle .icon-sun { display: block; }
+  body.time-night .theme-toggle .icon-moon { display: none; }
   .hero-inner {
     position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    background: var(--text-card-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--text-card-border);
+    border-radius: 24px;
+    padding: clamp(32px, 4.5vh, 52px) clamp(24px, 4.5vw, 48px);
+    max-width: min(720px, 100%);
+    max-height: calc(100vh - 160px);
+    box-sizing: border-box;
+    box-shadow: 0 24px 60px rgba(20, 30, 40, 0.12);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
   }
   .hero-tag {
     display: inline-flex;
@@ -257,7 +530,7 @@
   }
   .hero h1 { margin-bottom: 24px; }
   .hero h1 .accent {
-    color: var(--green);
+    color: var(--accent);
     font-style: italic;
   }
   .hero-sub {
@@ -333,7 +606,7 @@
     padding: 36px 28px;
     border-radius: var(--radius);
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
     box-shadow: var(--shadow);
   }
   .step:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
@@ -359,7 +632,7 @@
     background: var(--bg-card);
     border-radius: var(--radius);
     padding: 40px 34px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     border: 1px solid var(--line);
     position: relative;
     display: flex;
@@ -470,7 +743,7 @@
     border-radius: var(--radius);
     display: flex;
     gap: 22px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.5s ease, color 0.5s ease;
   }
   .why-card:hover { transform: translateY(-4px); }
   .why-icon {
@@ -569,7 +842,7 @@
     margin-bottom: 14px;
     overflow: hidden;
     border: 1px solid var(--line);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease, color 0.5s ease;
   }
   .faq-item.open {
     border-color: var(--green);
@@ -655,7 +928,7 @@
     background: var(--bg-card);
     padding: 30px 24px;
     border-radius: var(--radius);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease;
   }
   .contact-card:hover {
     transform: translateY(-4px);
@@ -773,7 +1046,6 @@
     .menu-toggle { display: flex; }
     .nav-right .lang-switch { order: 2; }
 
-    .hero { padding: 130px 0 70px; }
     section { padding: 70px 0; }
     .how, .why, .contact, .example { margin: 0 12px; border-radius: 28px; padding-left: 24px; padding-right: 24px; }
     .example { padding: 60px 24px; }
@@ -807,9 +1079,188 @@
     .service-card { padding: 32px 24px; }
     .why-card { padding: 28px 22px; flex-direction: column; gap: 16px; }
   }
+
+  /* ===== Weather effects ===== */
+  .weather-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  /* === Rain (simple full-screen falling drops) === */
+  .weather-drop {
+    position: absolute;
+    top: 0;
+    width: 1.5px;
+    background: linear-gradient(to bottom, rgba(170, 200, 225, 0), rgba(170, 200, 225, 0.7));
+    border-radius: 1px;
+    animation: weather-rain-fall linear infinite;
+    will-change: transform;
+  }
+  body.time-night .weather-drop {
+    background: linear-gradient(to bottom, rgba(190, 215, 235, 0), rgba(190, 215, 235, 0.55));
+  }
+  @keyframes weather-rain-fall {
+    0%   { transform: translate3d(0, -10vh, 0); }
+    100% { transform: translate3d(-25px, 115vh, 0); }
+  }
+
+  /* === Snow (simple full-screen falling flakes with sway) === */
+  .weather-flake {
+    position: absolute;
+    top: 0;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
+    animation: weather-snow-fall linear infinite;
+    will-change: transform;
+  }
+  @keyframes weather-snow-fall {
+    0%   { transform: translate3d(0,  -10vh, 0); }
+    25%  { transform: translate3d(18px, 25vh, 0); }
+    50%  { transform: translate3d(-12px, 55vh, 0); }
+    75%  { transform: translate3d(22px, 80vh, 0); }
+    100% { transform: translate3d(0,  115vh, 0); }
+  }
+
+
+  /* Cloud shadows */
+  .weather-cloud-shadow {
+    position: absolute;
+    width: 420px;
+    height: 90px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.07), transparent 70%);
+    border-radius: 50%;
+    animation: weather-cloud-drift linear infinite;
+    will-change: transform;
+  }
+  body.time-night .weather-cloud-shadow {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent 70%);
+  }
+  @keyframes weather-cloud-drift {
+    0%   { transform: translateX(-450px); }
+    100% { transform: translateX(calc(100vw + 50px)); }
+  }
+
+  /* Clear sky / sun */
+  .weather-sun-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 85% 5%, rgba(255, 213, 87, 0.14), transparent 45%),
+      radial-gradient(ellipse at 10% 90%, rgba(255, 213, 87, 0.07), transparent 45%);
+    animation: weather-sun-pulse 9s ease-in-out infinite;
+  }
+  body.time-night .weather-sun-overlay {
+    background: radial-gradient(ellipse at 85% 5%, rgba(240, 235, 216, 0.08), transparent 45%);
+  }
+  @keyframes weather-sun-pulse {
+    0%, 100% { opacity: 0.85; }
+    50%      { opacity: 1; }
+  }
+  /* Thunder flash */
+  .weather-flash {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+  }
+  .weather-flash.flashing {
+    animation: weather-flash-day 700ms ease-out;
+  }
+  body.time-night .weather-flash.flashing {
+    animation: weather-flash-night 700ms ease-out;
+  }
+  @keyframes weather-flash-day {
+    0%   { background: rgba(255, 255, 255, 0); }
+    5%   { background: rgba(255, 255, 255, 0.32); }
+    12%  { background: rgba(255, 255, 255, 0); }
+    22%  { background: rgba(255, 255, 255, 0.18); }
+    32%, 100% { background: rgba(255, 255, 255, 0); }
+  }
+  @keyframes weather-flash-night {
+    0%   { background: rgba(200, 220, 255, 0); }
+    5%   { background: rgba(210, 225, 255, 0.22); }
+    12%  { background: rgba(210, 225, 255, 0); }
+    22%  { background: rgba(210, 225, 255, 0.12); }
+    32%, 100% { background: rgba(210, 225, 255, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .weather-layer { display: none; }
+  }
+
+  /* ===== Debug panel (only via ?debug) ===== */
+  .debug-panel {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 9999;
+    background: rgba(20, 22, 24, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #E4DDD4;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 340px;
+  }
+  .debug-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .debug-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.55;
+    width: 56px;
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+  .debug-panel button {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+    color: #E4DDD4;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .debug-panel button:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .debug-panel button.active {
+    background: rgba(196, 149, 90, 0.32);
+    border-color: rgba(196, 149, 90, 0.7);
+  }
+  .debug-panel .debug-reset {
+    background: rgba(196, 149, 90, 0.18);
+    width: 100%;
+    padding: 6px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .debug-panel .debug-reset:hover {
+    background: rgba(196, 149, 90, 0.3);
+  }
 </style>
 </head>
 <body>
+
+<!-- ===== Weather effects layer ===== -->
+<div class="weather-layer" id="weatherLayer" aria-hidden="true"></div>
 
 <!-- ===== Navigation ===== -->
 <nav class="nav" id="nav">
@@ -828,6 +1279,15 @@
         <button class="lang-btn" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="ru">RU</button>
       </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
       <button class="menu-toggle" id="menuToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -837,15 +1297,279 @@
 
 <!-- ===== Hero ===== -->
 <header class="hero">
+  <svg class="hero-house-bg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="hb-sky-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop class="hb-sky-top-stop" offset="0%"/>
+        <stop class="hb-sky-bottom-stop" offset="100%"/>
+      </linearGradient>
+      <linearGradient id="hb-lawn-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop class="hb-lawn-near-stop" offset="0%"/>
+        <stop class="hb-lawn-far-stop" offset="100%"/>
+      </linearGradient>
+      <radialGradient id="hb-sun-glow-grad" cx="0.5" cy="0.5" r="0.5">
+        <stop class="hb-sun-glow-in-stop" offset="0%"/>
+        <stop class="hb-sun-glow-out-stop" offset="100%"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Sky -->
+    <rect width="1200" height="600" fill="url(#hb-sky-grad)"/>
+
+    <!-- Stars -->
+    <g class="hb-stars">
+      <circle cx="80" cy="60" r="1.5"/><circle cx="180" cy="120" r="1"/>
+      <circle cx="260" cy="80" r="1.3"/><circle cx="340" cy="40" r="1.5"/>
+      <circle cx="430" cy="110" r="1"/><circle cx="510" cy="60" r="1.3"/>
+      <circle cx="600" cy="100" r="1.5"/><circle cx="690" cy="40" r="1"/>
+      <circle cx="780" cy="80" r="1.3"/><circle cx="870" cy="130" r="1"/>
+      <circle cx="960" cy="50" r="1.5"/><circle cx="1060" cy="100" r="1.3"/>
+      <circle cx="1140" cy="50" r="1"/><circle cx="40" cy="140" r="1.3"/>
+      <circle cx="220" cy="180" r="1"/><circle cx="400" cy="170" r="1.2"/>
+      <circle cx="540" cy="160" r="1"/><circle cx="730" cy="180" r="1.2"/>
+      <circle cx="900" cy="180" r="1"/><circle cx="1100" cy="160" r="1.2"/>
+    </g>
+
+    <!-- Sun/Moon (in sky, top-right) -->
+    <circle cx="980" cy="135" r="115" fill="url(#hb-sun-glow-grad)"/>
+    <circle class="hb-sun" cx="980" cy="135" r="46"/>
+    <g class="hb-moon-craters">
+      <circle cx="993" cy="120" r="6"/>
+      <circle cx="965" cy="145" r="4"/>
+      <circle cx="985" cy="153" r="3"/>
+      <circle cx="1000" cy="140" r="2.5"/>
+    </g>
+
+    <!-- Distant hills (above new horizon line at y=360) -->
+    <path class="hb-hills" d="M0,330 Q200,295 400,318 Q600,288 800,312 Q1000,295 1200,318 L1200,360 L0,360 Z"/>
+
+    <!-- Lawn — top 60% sky, bottom 40% ground -->
+    <rect y="360" width="1200" height="240" fill="url(#hb-lawn-grad)"/>
+
+    <!-- Ground snow drifts (winter only, wavy top at horizon) -->
+    <path class="hb-snow-extras" d="M0,360 Q60,350 120,357 Q200,345 280,357 Q360,343 440,356 Q520,348 600,358 Q680,344 760,356 Q840,348 920,358 Q1000,343 1080,357 Q1160,350 1200,360 L1200,600 L0,600 Z"/>
+    <path class="hb-snow-extras" d="M0,440 Q120,432 240,438 Q360,428 480,438 Q600,432 720,438 Q840,428 960,438 Q1080,432 1200,440 L1200,600 L0,600 Z" opacity="0.65"/>
+
+    <!-- Foreground scene — smaller, centered, on the lawn -->
+    <g class="hb-scene" transform="translate(270, 304) scale(0.55)">
+
+    <!-- Tree back-left -->
+    <g class="hb-tree">
+      <rect class="hb-tree-trunk" x="42" y="345" width="14" height="95"/>
+      <g class="hb-tree-leaves-group">
+        <circle class="hb-tree-leaves" cx="49" cy="325" r="38"/>
+        <circle class="hb-tree-leaves" cx="25" cy="350" r="28"/>
+        <circle class="hb-tree-leaves" cx="73" cy="350" r="28"/>
+        <circle class="hb-tree-leaves" cx="49" cy="298" r="30"/>
+      </g>
+      <g class="hb-tree-bare">
+        <line x1="49" y1="345" x2="20" y2="295" stroke-width="2.5"/>
+        <line x1="49" y1="345" x2="78" y2="295" stroke-width="2.5"/>
+        <line x1="49" y1="345" x2="49" y2="280" stroke-width="2.5"/>
+      </g>
+    </g>
+
+    <!-- Tree front-left -->
+    <g class="hb-tree">
+      <rect class="hb-tree-trunk" x="195" y="320" width="20" height="120"/>
+      <g class="hb-tree-leaves-group">
+        <circle class="hb-tree-leaves" cx="205" cy="290" r="55"/>
+        <circle class="hb-tree-leaves" cx="170" cy="315" r="42"/>
+        <circle class="hb-tree-leaves" cx="240" cy="315" r="42"/>
+        <circle class="hb-tree-leaves" cx="205" cy="252" r="38"/>
+      </g>
+      <g class="hb-tree-bare">
+        <line x1="205" y1="320" x2="160" y2="265" stroke-width="3.5"/>
+        <line x1="205" y1="320" x2="250" y2="265" stroke-width="3.5"/>
+        <line x1="205" y1="320" x2="205" y2="240" stroke-width="3.5"/>
+        <line x1="205" y1="290" x2="155" y2="278" stroke-width="2.5"/>
+        <line x1="205" y1="290" x2="255" y2="278" stroke-width="2.5"/>
+        <line x1="205" y1="265" x2="178" y2="235" stroke-width="2"/>
+        <line x1="205" y1="265" x2="232" y2="235" stroke-width="2"/>
+      </g>
+    </g>
+
+    <!-- House -->
+    <g>
+      <!-- Wall -->
+      <rect class="hb-wall" x="460" y="295" width="280" height="170"/>
+      <!-- Roof -->
+      <polygon class="hb-roof" points="438,295 600,182 762,295"/>
+      <polygon class="hb-roof-shade" points="600,182 762,295 600,295"/>
+      <!-- Snow on roof -->
+      <path class="hb-snow-roof" d="M448,290 Q480,272 510,265 Q555,250 600,200 Q645,250 690,265 Q720,272 752,290 L750,300 L450,300 Z"/>
+      <!-- Chimney -->
+      <rect class="hb-chimney" x="672" y="208" width="26" height="55"/>
+      <rect class="hb-chimney-top" x="668" y="204" width="34" height="8"/>
+      <rect class="hb-snow-chimney" x="666" y="198" width="38" height="7" rx="2"/>
+      <!-- Door -->
+      <rect class="hb-door" x="578" y="385" width="44" height="80" rx="2"/>
+      <circle class="hb-door-knob" cx="613" cy="425" r="2"/>
+      <!-- Window left -->
+      <g>
+        <rect class="hb-window-frame" x="488" y="335" width="60" height="60" rx="2"/>
+        <rect class="hb-window-glow" x="492" y="339" width="52" height="52"/>
+        <line class="hb-window-cross" x1="518" y1="335" x2="518" y2="395"/>
+        <line class="hb-window-cross" x1="488" y1="365" x2="548" y2="365"/>
+      </g>
+      <!-- Window right -->
+      <g>
+        <rect class="hb-window-frame" x="652" y="335" width="60" height="60" rx="2"/>
+        <rect class="hb-window-glow" x="656" y="339" width="52" height="52"/>
+        <line class="hb-window-cross" x1="682" y1="335" x2="682" y2="395"/>
+        <line class="hb-window-cross" x1="652" y1="365" x2="712" y2="365"/>
+      </g>
+    </g>
+
+    <!-- Smoke (winter) -->
+    <g class="hb-smoke">
+      <circle cx="685" cy="195" r="7"/>
+      <circle cx="692" cy="175" r="9"/>
+      <circle cx="680" cy="152" r="11"/>
+      <circle cx="694" cy="125" r="13"/>
+      <circle cx="682" cy="92" r="15"/>
+    </g>
+
+    <!-- Tree front-right -->
+    <g class="hb-tree">
+      <rect class="hb-tree-trunk" x="985" y="320" width="20" height="120"/>
+      <g class="hb-tree-leaves-group">
+        <circle class="hb-tree-leaves" cx="995" cy="290" r="55"/>
+        <circle class="hb-tree-leaves" cx="960" cy="315" r="42"/>
+        <circle class="hb-tree-leaves" cx="1030" cy="315" r="42"/>
+        <circle class="hb-tree-leaves" cx="995" cy="252" r="38"/>
+      </g>
+      <g class="hb-tree-bare">
+        <line x1="995" y1="320" x2="950" y2="265" stroke-width="3.5"/>
+        <line x1="995" y1="320" x2="1040" y2="265" stroke-width="3.5"/>
+        <line x1="995" y1="320" x2="995" y2="240" stroke-width="3.5"/>
+        <line x1="995" y1="290" x2="945" y2="278" stroke-width="2.5"/>
+        <line x1="995" y1="290" x2="1045" y2="278" stroke-width="2.5"/>
+        <line x1="995" y1="265" x2="968" y2="235" stroke-width="2"/>
+        <line x1="995" y1="265" x2="1022" y2="235" stroke-width="2"/>
+      </g>
+    </g>
+
+    <!-- Tree back-right -->
+    <g class="hb-tree">
+      <rect class="hb-tree-trunk" x="1144" y="345" width="14" height="95"/>
+      <g class="hb-tree-leaves-group">
+        <circle class="hb-tree-leaves" cx="1151" cy="325" r="38"/>
+        <circle class="hb-tree-leaves" cx="1125" cy="350" r="28"/>
+        <circle class="hb-tree-leaves" cx="1175" cy="350" r="28"/>
+        <circle class="hb-tree-leaves" cx="1151" cy="298" r="30"/>
+      </g>
+      <g class="hb-tree-bare">
+        <line x1="1151" y1="345" x2="1122" y2="295" stroke-width="2.5"/>
+        <line x1="1151" y1="345" x2="1180" y2="295" stroke-width="2.5"/>
+        <line x1="1151" y1="345" x2="1151" y2="280" stroke-width="2.5"/>
+      </g>
+    </g>
+
+    <!-- Bushes -->
+    <g>
+      <ellipse class="hb-bush" cx="380" cy="455" rx="38" ry="22"/>
+      <ellipse class="hb-bush" cx="345" cy="462" rx="22" ry="14"/>
+      <ellipse class="hb-bush" cx="290" cy="478" rx="30" ry="18"/>
+      <ellipse class="hb-bush" cx="820" cy="455" rx="38" ry="22"/>
+      <ellipse class="hb-bush" cx="855" cy="462" rx="22" ry="14"/>
+      <ellipse class="hb-bush" cx="910" cy="478" rx="30" ry="18"/>
+    </g>
+
+    <!-- Snow caps on bushes (winter) -->
+    <g class="hb-snow-extras">
+      <ellipse cx="380" cy="442" rx="34" ry="6"/>
+      <ellipse cx="345" cy="453" rx="20" ry="4"/>
+      <ellipse cx="290" cy="467" rx="26" ry="5"/>
+      <ellipse cx="820" cy="442" rx="34" ry="6"/>
+      <ellipse cx="855" cy="453" rx="20" ry="4"/>
+      <ellipse cx="910" cy="467" rx="26" ry="5"/>
+    </g>
+
+    <!-- Path to door -->
+    <path class="hb-path" d="M580,465 L530,600 L670,600 L620,465 Z"/>
+    <path class="hb-path-shade" d="M620,465 L670,600 L645,600 L605,465 Z"/>
+
+    <!-- Fence -->
+    <g>
+      <rect class="hb-fence-rail" x="0" y="495" width="540" height="3"/>
+      <rect class="hb-fence-rail" x="660" y="495" width="540" height="3"/>
+      <rect class="hb-fence-post" x="40" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="120" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="200" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="280" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="360" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="440" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="520" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="680" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="760" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="840" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="920" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="1000" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="1080" y="478" width="4" height="36"/>
+      <rect class="hb-fence-post" x="1160" y="478" width="4" height="36"/>
+    </g>
+
+    <!-- Snow on fence (winter) -->
+    <g class="hb-snow-extras">
+      <rect x="0" y="491" width="540" height="3"/>
+      <rect x="660" y="491" width="540" height="3"/>
+      <rect x="37" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="117" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="197" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="277" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="357" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="437" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="517" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="677" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="757" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="837" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="917" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="997" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="1077" y="473" width="10" height="5" rx="1.5"/>
+      <rect x="1157" y="473" width="10" height="5" rx="1.5"/>
+    </g>
+
+    <!-- Flowers (spring) -->
+    <g class="hb-flowers">
+      <g><circle class="hb-flower-petal" cx="80" cy="540" r="4"/><circle class="hb-flower-center" cx="80" cy="540" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="150" cy="555" r="4"/><circle class="hb-flower-center" cx="150" cy="555" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="240" cy="535" r="4"/><circle class="hb-flower-center" cx="240" cy="535" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="320" cy="565" r="4"/><circle class="hb-flower-center" cx="320" cy="565" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="430" cy="555" r="4"/><circle class="hb-flower-center" cx="430" cy="555" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="780" cy="555" r="4"/><circle class="hb-flower-center" cx="780" cy="555" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="880" cy="535" r="4"/><circle class="hb-flower-center" cx="880" cy="535" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="960" cy="565" r="4"/><circle class="hb-flower-center" cx="960" cy="565" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="1050" cy="540" r="4"/><circle class="hb-flower-center" cx="1050" cy="540" r="1.5"/></g>
+      <g><circle class="hb-flower-petal" cx="1130" cy="555" r="4"/><circle class="hb-flower-center" cx="1130" cy="555" r="1.5"/></g>
+    </g>
+
+    <!-- Fallen leaves (autumn) -->
+    <g class="hb-fallen-leaves">
+      <ellipse cx="100" cy="555" rx="6" ry="3" transform="rotate(15 100 555)"/>
+      <ellipse cx="170" cy="540" rx="5" ry="3" transform="rotate(-20 170 540)"/>
+      <ellipse cx="250" cy="570" rx="6" ry="3" transform="rotate(40 250 570)"/>
+      <ellipse cx="330" cy="550" rx="5" ry="3" transform="rotate(-10 330 550)"/>
+      <ellipse cx="420" cy="565" rx="6" ry="3" transform="rotate(25 420 565)"/>
+      <ellipse cx="780" cy="565" rx="6" ry="3" transform="rotate(15 780 565)"/>
+      <ellipse cx="860" cy="540" rx="5" ry="3" transform="rotate(-25 860 540)"/>
+      <ellipse cx="940" cy="555" rx="6" ry="3" transform="rotate(35 940 555)"/>
+      <ellipse cx="1020" cy="570" rx="5" ry="3" transform="rotate(-15 1020 570)"/>
+      <ellipse cx="1100" cy="545" rx="6" ry="3" transform="rotate(20 1100 545)"/>
+    </g>
+
+    </g><!-- /hb-scene -->
+  </svg>
+
   <div class="container hero-inner">
     <div class="hero-tag reveal">
       <span class="hero-tag-dot"></span>
       <span data-i18n="hero_tag">Familjeföretag i Sverige</span>
     </div>
     <h1 class="reveal reveal-delay-1">
-      <span data-i18n="hero_title_1">Sälj ditt hus</span>
-      <span class="accent" data-i18n="hero_title_2">snabbare och dyrare</span>
-      <span data-i18n="hero_title_3"> — utan förskott</span>
+      <span data-i18n="hero_title_line1">Sälj ditt hus</span><br>
+      <span class="accent" data-i18n="hero_title_line2">snabbare och dyrare</span><br>
+      <span data-i18n="hero_title_line3">— utan förskott</span>
     </h1>
     <p class="hero-sub reveal reveal-delay-2" data-i18n="hero_sub">
       Vi förbereder din tomt och ditt hus inför försäljningen. Du höjer bara annonspriset — vi får betalt först när huset är sålt. Inga risker, inga utgifter i förväg.
@@ -856,20 +1580,6 @@
         <span class="btn-arrow">→</span>
       </a>
       <a href="#how" class="btn btn-secondary" data-i18n="hero_btn_2">Hur det fungerar</a>
-    </div>
-    <div class="hero-stats reveal reveal-delay-4">
-      <div>
-        <div class="hero-stat-num">0 kr</div>
-        <div class="hero-stat-label" data-i18n="stat_1">Förskott från dig</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">+5–10%</div>
-        <div class="hero-stat-label" data-i18n="stat_2">Genomsnittlig prisökning</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-label" data-i18n="stat_3">Generationer i samma team</div>
-      </div>
     </div>
   </div>
 </header>
@@ -1219,9 +1929,9 @@ const translations = {
     nav_contact: "Kontakt",
 
     hero_tag: "Familjeföretag i Sverige",
-    hero_title_1: "Sälj ditt hus",
-    hero_title_2: "snabbare och dyrare",
-    hero_title_3: " — utan förskott",
+    hero_title_line1: "Sälj ditt hus",
+    hero_title_line2: "snabbare och dyrare",
+    hero_title_line3: "— utan förskott",
     hero_sub: "Vi förbereder din tomt och ditt hus inför försäljningen. Du höjer bara annonspriset — vi får betalt först när huset är sålt. Inga risker, inga utgifter i förväg.",
     hero_btn_1: "Få en kostnadsfri bedömning",
     hero_btn_2: "Hur det fungerar",
@@ -1340,9 +2050,9 @@ const translations = {
     nav_contact: "Contact",
 
     hero_tag: "Family business in Sweden",
-    hero_title_1: "Sell your house",
-    hero_title_2: "faster and for more",
-    hero_title_3: " — without paying upfront",
+    hero_title_line1: "Sell your house",
+    hero_title_line2: "faster and for more",
+    hero_title_line3: "— without paying upfront",
     hero_sub: "We prepare your property and house for sale. You simply raise the listing price — we get paid only after the house is sold. No risk, no upfront costs.",
     hero_btn_1: "Get a free assessment",
     hero_btn_2: "How it works",
@@ -1461,9 +2171,9 @@ const translations = {
     nav_contact: "Контакты",
 
     hero_tag: "Семейный бизнес в Швеции",
-    hero_title_1: "Продайте свой дом",
-    hero_title_2: "быстрее и дороже",
-    hero_title_3: " — без предоплаты",
+    hero_title_line1: "Продайте свой дом",
+    hero_title_line2: "быстрее и дороже",
+    hero_title_line3: "— без предоплаты",
     hero_sub: "Мы приводим в порядок участок и сам дом перед продажей. Вы просто поднимаете цену в объявлении — мы получаем оплату только после того, как дом продан. Никаких рисков и никаких затрат заранее.",
     hero_btn_1: "Получить бесплатную оценку",
     hero_btn_2: "Как это работает",
@@ -1656,6 +2366,264 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== Theme: time of day + season =====
+const TIME_CLASSES = ['time-morning', 'time-day', 'time-evening', 'time-night'];
+const SEASON_CLASSES = ['season-winter', 'season-spring', 'season-summer', 'season-autumn'];
+
+function detectTimeOfDay() {
+  const h = new Date().getHours();
+  if (h >= 6 && h < 10) return 'morning';
+  if (h >= 10 && h < 17) return 'day';
+  if (h >= 17 && h < 21) return 'evening';
+  return 'night';
+}
+
+function detectSeason() {
+  const m = new Date().getMonth(); // 0 = Jan
+  if (m === 11 || m <= 1) return 'winter';
+  if (m >= 2 && m <= 4) return 'spring';
+  if (m >= 5 && m <= 7) return 'summer';
+  return 'autumn';
+}
+
+function applyTheme() {
+  const body = document.body;
+  TIME_CLASSES.forEach(c => body.classList.remove(c));
+  SEASON_CLASSES.forEach(c => body.classList.remove(c));
+
+  body.classList.add('season-' + (window.__debugSeason || detectSeason()));
+
+  let time;
+  if (window.__debugTime) {
+    time = window.__debugTime;
+  } else {
+    let override = null;
+    try { override = localStorage.getItem('bondar_theme_override'); } catch(e) {}
+    if (override === 'light') time = 'day';
+    else if (override === 'dark') time = 'night';
+    else time = detectTimeOfDay();
+  }
+
+  body.classList.add('time-' + time);
+}
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.body.classList.contains('time-night');
+  const next = isDark ? 'light' : 'dark';
+  try { localStorage.setItem('bondar_theme_override', next); } catch(e) {}
+  applyTheme();
+});
+
+applyTheme();
+
+// Re-check time of day every 10 minutes (if no manual override)
+setInterval(() => {
+  let override = null;
+  try { override = localStorage.getItem('bondar_theme_override'); } catch(e) {}
+  if (!override) applyTheme();
+}, 10 * 60 * 1000);
+
+// ===== Weather: geolocation + OpenWeatherMap + visual effects =====
+const WEATHER_API_KEY = 'd1c3aa6c1c355aa57c0242ac1e231802';
+const WEATHER_FALLBACK = { lat: 59.33, lon: 18.07 }; // Stockholm
+const WEATHER_CLASSES = ['weather-rain', 'weather-snow', 'weather-thunder', 'weather-clouds', 'weather-clear'];
+let weatherThunderTimer = null;
+
+function classifyWeather(id) {
+  if (id >= 200 && id <= 232) return 'thunder';
+  if (id >= 300 && id <= 531) return 'rain';
+  if (id >= 600 && id <= 622) return 'snow';
+  if (id === 800) return 'clear';
+  if (id >= 801 && id <= 804) return 'clouds';
+  return null;
+}
+
+function getCoords() {
+  return new Promise(resolve => {
+    if (!navigator.geolocation) { resolve(WEATHER_FALLBACK); return; }
+    navigator.geolocation.getCurrentPosition(
+      pos => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+      () => resolve(WEATHER_FALLBACK),
+      { timeout: 8000, maximumAge: 30 * 60 * 1000 }
+    );
+  });
+}
+
+async function fetchWeatherId(lat, lon) {
+  try {
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data && data.weather && data.weather[0] ? data.weather[0].id : null;
+  } catch (e) { return null; }
+}
+
+// ----- Particles (rain + snow) -----
+const weatherLayer = document.getElementById('weatherLayer');
+const RAIN_DROP_COUNT = 35;
+const SNOW_FLAKE_COUNT = 35;
+
+function spawnRainDrops(layer) {
+  for (let i = 0; i < RAIN_DROP_COUNT; i++) {
+    const d = document.createElement('div');
+    d.className = 'weather-drop';
+    d.style.left = (Math.random() * 100).toFixed(2) + 'vw';
+    d.style.animationDuration = (0.7 + Math.random() * 0.6).toFixed(2) + 's';
+    d.style.animationDelay = (-Math.random() * 2).toFixed(2) + 's';
+    d.style.opacity = (0.4 + Math.random() * 0.45).toFixed(2);
+    d.style.height = (40 + Math.random() * 50).toFixed(0) + 'px';
+    layer.appendChild(d);
+  }
+}
+
+function spawnSnowflakes(layer) {
+  for (let i = 0; i < SNOW_FLAKE_COUNT; i++) {
+    const f = document.createElement('div');
+    f.className = 'weather-flake';
+    const size = (3 + Math.random() * 6).toFixed(1);
+    f.style.width = size + 'px';
+    f.style.height = size + 'px';
+    f.style.left = (Math.random() * 100).toFixed(2) + 'vw';
+    f.style.animationDuration = (8 + Math.random() * 10).toFixed(2) + 's';
+    f.style.animationDelay = (-Math.random() * 12).toFixed(2) + 's';
+    f.style.opacity = (0.55 + Math.random() * 0.4).toFixed(2);
+    layer.appendChild(f);
+  }
+}
+
+function createCloudShadows(parent, count) {
+  for (let i = 0; i < count; i++) {
+    const c = document.createElement('div');
+    c.className = 'weather-cloud-shadow';
+    c.style.top = (5 + Math.random() * 80) + 'vh';
+    c.style.animationDuration = (45 + Math.random() * 40).toFixed(0) + 's';
+    c.style.animationDelay = (-Math.random() * 60).toFixed(0) + 's';
+    c.style.opacity = (0.35 + Math.random() * 0.4).toFixed(2);
+    const scale = (0.6 + Math.random() * 0.9).toFixed(2);
+    c.style.transform = 'scale(' + scale + ')';
+    parent.appendChild(c);
+  }
+}
+
+function scheduleThunderFlashes(flashEl) {
+  function fire() {
+    flashEl.classList.remove('flashing');
+    void flashEl.offsetWidth; // force reflow → restart animation
+    flashEl.classList.add('flashing');
+    weatherThunderTimer = setTimeout(fire, 5000 + Math.random() * 5000);
+  }
+  weatherThunderTimer = setTimeout(fire, 2000 + Math.random() * 3000);
+}
+
+function applyWeather(type) {
+  const body = document.body;
+  WEATHER_CLASSES.forEach(c => body.classList.remove(c));
+  if (weatherThunderTimer) { clearTimeout(weatherThunderTimer); weatherThunderTimer = null; }
+
+  weatherLayer.innerHTML = '';
+  if (!type) return;
+
+  body.classList.add('weather-' + type);
+
+  if (type === 'rain') {
+    spawnRainDrops(weatherLayer);
+  } else if (type === 'thunder') {
+    spawnRainDrops(weatherLayer);
+    const flash = document.createElement('div');
+    flash.className = 'weather-flash';
+    weatherLayer.appendChild(flash);
+    scheduleThunderFlashes(flash);
+  } else if (type === 'snow') {
+    spawnSnowflakes(weatherLayer);
+  } else if (type === 'clouds') {
+    createCloudShadows(weatherLayer, 6);
+  } else if (type === 'clear') {
+    const sun = document.createElement('div');
+    sun.className = 'weather-sun-overlay';
+    weatherLayer.appendChild(sun);
+  }
+}
+
+async function updateWeather() {
+  if (window.__debugWeather) { applyWeather(window.__debugWeather); return; }
+  const coords = await getCoords();
+  const id = await fetchWeatherId(coords.lat, coords.lon);
+  if (id === null) return; // silent fail
+  const type = classifyWeather(id);
+  if (!type) return;
+  applyWeather(type);
+}
+
+updateWeather();
+setInterval(updateWeather, 30 * 60 * 1000);
+
+// ===== Debug panel (only with ?debug in URL) =====
+(function debugPanel() {
+  if (!new URLSearchParams(location.search).has('bondar-panel')) return;
+
+  const panel = document.createElement('div');
+  panel.className = 'debug-panel';
+  panel.innerHTML = `
+    <div class="debug-row">
+      <span class="debug-label">Time</span>
+      <button data-debug-time="morning">Morning</button>
+      <button data-debug-time="day">Day</button>
+      <button data-debug-time="evening">Evening</button>
+      <button data-debug-time="night">Night</button>
+    </div>
+    <div class="debug-row">
+      <span class="debug-label">Season</span>
+      <button data-debug-season="winter">Winter</button>
+      <button data-debug-season="spring">Spring</button>
+      <button data-debug-season="summer">Summer</button>
+      <button data-debug-season="autumn">Autumn</button>
+    </div>
+    <div class="debug-row">
+      <span class="debug-label">Weather</span>
+      <button data-debug-weather="rain">Rain</button>
+      <button data-debug-weather="snow">Snow</button>
+      <button data-debug-weather="clear">Sun</button>
+      <button data-debug-weather="clouds">Clouds</button>
+      <button data-debug-weather="thunder">Thunder</button>
+    </div>
+    <div class="debug-row">
+      <button class="debug-reset" data-debug-reset>Auto / Reset</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  function highlight(group, btn) {
+    panel.querySelectorAll('[data-debug-' + group + ']').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  panel.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    if (btn.dataset.debugTime) {
+      window.__debugTime = btn.dataset.debugTime;
+      applyTheme();
+      highlight('time', btn);
+    } else if (btn.dataset.debugSeason) {
+      window.__debugSeason = btn.dataset.debugSeason;
+      applyTheme();
+      highlight('season', btn);
+    } else if (btn.dataset.debugWeather) {
+      window.__debugWeather = btn.dataset.debugWeather;
+      applyWeather(window.__debugWeather);
+      highlight('weather', btn);
+    } else if ('debugReset' in btn.dataset) {
+      window.__debugTime = null;
+      window.__debugSeason = null;
+      window.__debugWeather = null;
+      try { localStorage.removeItem('bondar_theme_override'); } catch(e) {}
+      panel.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      applyTheme();
+      updateWeather();
+    }
+  });
+})();
 </script>
 </body>
 </html>

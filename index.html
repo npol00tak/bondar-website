@@ -619,26 +619,26 @@
     flex-direction: column;
     cursor: pointer;
   }
-  .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(59, 107, 78, 0.15);
-    border-color: var(--green);
+  .service-card.reveal {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease, border-color 0.3s ease, opacity 0.6s ease;
+  }
+  .service-card.reveal:hover,
+  .service-card.service-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 56px rgba(59, 107, 78, 0.28);
+    border-color: var(--accent);
   }
   .service-card:hover .service-icon {
     transform: scale(1.1);
-    background: var(--green);
+    background: var(--accent);
     color: #fff;
-  }
-  .service-card.featured:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 28px 56px rgba(59, 107, 78, 0.28);
   }
   .service-card.featured:hover .service-icon {
     background: var(--gold);
     color: #fff;
   }
   .service-card:focus-visible {
-    outline: 2px solid var(--green);
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
   }
   .service-card h3 { transition: color 0.3s ease; }
@@ -827,6 +827,17 @@
     border: 1px solid rgba(255,255,255,0.15);
     padding: 32px;
     border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  }
+  .example-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    border-color: rgba(196, 149, 90, 0.55);
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .example-card:hover .example-card-value {
+    transform: scale(1.03);
   }
   .example-card-label {
     font-size: 0.85rem;
@@ -841,6 +852,8 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 8px;
+    transform-origin: left center;
+    transition: transform 0.3s ease, color 0.5s ease;
   }
   .example-card-desc {
     font-size: 0.92rem;
@@ -2719,6 +2732,79 @@ const langTitles = {
   ru: "Bondar — продайте дом быстрее и дороже"
 };
 
+// ===== Email mailto templates =====
+const EMAIL_TEMPLATES = {
+  sv: {
+    subject: 'Förfrågan om hemförberedelse inför försäljning',
+    body: `Hej!
+
+Jag skulle vilja veta mer om era tjänster för hemförberedelse inför försäljning. Jag har några frågor:
+
+1.
+2.
+3.
+
+Kort information om bostaden:
+- Adress/område:
+- Husets storlek:
+- Tomtens storlek:
+- Förväntat försäljningspris:
+
+När skulle det passa er att prata eller träffas?
+
+Tack!`
+  },
+  en: {
+    subject: 'Inquiry about pre-sale home preparation services',
+    body: `Hello!
+
+I'd like to learn more about your home preparation services. I have a few questions:
+
+1.
+2.
+3.
+
+Brief information about the property:
+- Address/area:
+- House size:
+- Lot size:
+- Expected sale price:
+
+When would be a good time to talk or meet?
+
+Thank you!`
+  },
+  ru: {
+    subject: 'Запрос на консультацию по подготовке дома к продаже',
+    body: `Здравствуйте!
+
+Я хотел бы узнать подробнее о ваших услугах по подготовке дома к продаже. У меня есть несколько вопросов:
+
+1.
+2.
+3.
+
+Краткая информация о доме:
+- Адрес/район:
+- Площадь дома:
+- Площадь участка:
+- Планируемая цена продажи:
+
+Когда вам было бы удобно созвониться или встретиться?
+
+Спасибо!`
+  }
+};
+function updateEmailLink(lang) {
+  const tpl = EMAIL_TEMPLATES[lang] || EMAIL_TEMPLATES.sv;
+  const url = 'mailto:info@bondar.se'
+    + '?subject=' + encodeURIComponent(tpl.subject)
+    + '&body=' + encodeURIComponent(tpl.body);
+  document.querySelectorAll('a[href^="mailto:info@bondar.se"]').forEach(a => {
+    a.href = url;
+  });
+}
+
 // ===== Language switcher =====
 function setLang(lang) {
   const dict = translations[lang];
@@ -2731,6 +2817,7 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+  updateEmailLink(lang);
   try { localStorage.setItem('bondar_lang', lang); } catch(e) {}
 }
 

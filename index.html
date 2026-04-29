@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bondar — Sälj ditt hus snabbare och dyrare</title>
 <meta name="description" content="Vi förbereder ditt hus inför försäljningen — utan förskott. Du betalar först när huset är sålt.">
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="apple-touch-icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -254,7 +256,7 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.7rem;
     font-weight: 700;
-    color: var(--green);
+    color: var(--accent);
     letter-spacing: 0.02em;
     display: flex;
     align-items: center;
@@ -506,28 +508,6 @@
     box-shadow: 0 24px 60px rgba(20, 30, 40, 0.12);
     transition: background-color 0.5s ease, border-color 0.5s ease;
   }
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--green-soft);
-    color: var(--green-dark);
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-  }
-  .hero-tag-dot {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.2); }
-  }
   .hero h1 { margin-bottom: 24px; }
   .hero h1 .accent {
     color: var(--accent);
@@ -632,17 +612,37 @@
     background: var(--bg-card);
     border-radius: var(--radius);
     padding: 40px 34px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, color 0.5s ease, border-color 0.3s ease;
     border: 1px solid var(--line);
     position: relative;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
   }
   .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: transparent;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(59, 107, 78, 0.15);
+    border-color: var(--green);
   }
+  .service-card:hover .service-icon {
+    transform: scale(1.1);
+    background: var(--green);
+    color: #fff;
+  }
+  .service-card.featured:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 56px rgba(59, 107, 78, 0.28);
+  }
+  .service-card.featured:hover .service-icon {
+    background: var(--gold);
+    color: #fff;
+  }
+  .service-card:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 4px;
+  }
+  .service-card h3 { transition: color 0.3s ease; }
+  .service-card:not(.featured):hover h3 { color: var(--accent); }
   .service-card.featured {
     background: var(--green);
     color: white;
@@ -679,6 +679,7 @@
     justify-content: center;
     margin-bottom: 24px;
     color: var(--green);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   }
   .service-card.featured .service-icon {
     background: rgba(255,255,255,0.15);
@@ -743,9 +744,23 @@
     border-radius: var(--radius);
     display: flex;
     gap: 22px;
-    transition: transform 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+    border: 1px solid transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.5s ease, color 0.5s ease;
+    cursor: pointer;
   }
-  .why-card:hover { transform: translateY(-4px); }
+  .why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(59, 107, 78, 0.12);
+    border-color: var(--accent);
+  }
+  .why-card:hover .why-icon {
+    transform: scale(1.08);
+    background: var(--accent);
+    color: #fff;
+  }
+  .why-card:hover h3 {
+    color: var(--accent);
+  }
   .why-icon {
     flex-shrink: 0;
     width: 52px; height: 52px;
@@ -755,11 +770,13 @@
     align-items: center;
     justify-content: center;
     color: var(--gold);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   }
   .why-icon svg { width: 26px; height: 26px; }
   .why-card h3 {
     font-size: 1.2rem;
     margin-bottom: 8px;
+    transition: color 0.3s ease;
   }
   .why-card p {
     color: var(--text-soft);
@@ -1126,23 +1143,6 @@
   }
 
 
-  /* Cloud shadows */
-  .weather-cloud-shadow {
-    position: absolute;
-    width: 420px;
-    height: 90px;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.07), transparent 70%);
-    border-radius: 50%;
-    animation: weather-cloud-drift linear infinite;
-    will-change: transform;
-  }
-  body.time-night .weather-cloud-shadow {
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent 70%);
-  }
-  @keyframes weather-cloud-drift {
-    0%   { transform: translateX(-450px); }
-    100% { transform: translateX(calc(100vw + 50px)); }
-  }
 
   /* Clear sky / sun */
   .weather-sun-overlay {
@@ -1189,6 +1189,193 @@
 
   @media (prefers-reduced-motion: reduce) {
     .weather-layer { display: none; }
+  }
+
+  /* ===== Service modals ===== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .modal.open {
+    display: flex;
+    opacity: 1;
+  }
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 26, 22, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .modal-content {
+    position: relative;
+    background: var(--bg-card);
+    color: var(--text);
+    border-radius: 24px;
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 48px);
+    max-width: 640px;
+    width: 100%;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+    transform: scale(0.94) translateY(8px);
+    transition: transform 0.3s ease;
+  }
+  .modal.open .modal-content {
+    transform: scale(1) translateY(0);
+  }
+  .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    color: var(--text-soft);
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .modal-close:hover {
+    background: var(--green-soft);
+    color: var(--green);
+  }
+  .modal-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    margin-bottom: 12px;
+    padding-right: 40px;
+  }
+  .modal-desc {
+    color: var(--text-soft);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .modal-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 22px 0 14px;
+  }
+  .modal-list {
+    list-style: none;
+    margin-bottom: 8px;
+    padding: 0;
+  }
+  .modal-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .modal-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  .modal-benefits {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .modal-benefit {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-soft);
+    border-radius: 12px;
+    font-size: 0.93rem;
+  }
+  .modal-benefit svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: var(--green);
+  }
+  .modal-steps {
+    list-style: none;
+    counter-reset: ms;
+    margin-bottom: 28px;
+    padding: 0;
+  }
+  .modal-steps li {
+    position: relative;
+    padding-left: 38px;
+    margin-bottom: 12px;
+    counter-increment: ms;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .modal-steps li::before {
+    content: counter(ms);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-cta {
+    width: 100%;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  .modal-close-link {
+    background: none;
+    border: none;
+    color: var(--text-soft);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.88rem;
+    display: block;
+    margin: 0 auto;
+    padding: 6px;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  }
+  .modal-close-link:hover {
+    color: var(--green);
+    text-decoration-color: var(--green);
+  }
+  body.modal-open {
+    overflow: hidden;
+  }
+  @media (max-width: 600px) {
+    .modal { padding: 12px; }
+    .modal-content { border-radius: 18px; max-height: calc(100vh - 24px); }
   }
 
   /* ===== Debug panel (only via ?debug) ===== */
@@ -1562,10 +1749,6 @@
   </svg>
 
   <div class="container hero-inner">
-    <div class="hero-tag reveal">
-      <span class="hero-tag-dot"></span>
-      <span data-i18n="hero_tag">Familjeföretag i Sverige</span>
-    </div>
     <h1 class="reveal reveal-delay-1">
       <span data-i18n="hero_title_line1">Sälj ditt hus</span><br>
       <span class="accent" data-i18n="hero_title_line2">snabbare och dyrare</span><br>
@@ -1606,7 +1789,7 @@
       <div class="step reveal reveal-delay-3">
         <div class="step-num">03</div>
         <h3 data-i18n="step_3_title">Vi utför arbetet</h3>
-        <p data-i18n="step_3_desc">Far och son tar hand om allt — utvändigt, invändigt eller båda delarna. Vi använder egen utrustning och egna material.</p>
+        <p data-i18n="step_3_desc">Vårt team utför allt arbete professionellt — vi har egen utrustning och egna material.</p>
       </div>
       <div class="step reveal reveal-delay-4">
         <div class="step-num">04</div>
@@ -1655,7 +1838,7 @@
     </div>
     <div class="services-grid">
       <!-- Outdoor -->
-      <div class="service-card reveal reveal-delay-1">
+      <div class="service-card reveal reveal-delay-1" data-modal="modal-outdoor" role="button" tabindex="0">
         <div class="service-icon">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L4 9v12h5v-7h6v7h5V9l-8-7z"/>
@@ -1676,7 +1859,7 @@
       </div>
 
       <!-- Full -->
-      <div class="service-card featured reveal reveal-delay-2">
+      <div class="service-card featured reveal reveal-delay-2" data-modal="modal-full" role="button" tabindex="0">
         <div class="service-tag" data-i18n="serv_pop">Mest populärt</div>
         <div class="service-icon">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1684,39 +1867,40 @@
           </svg>
         </div>
         <h3 data-i18n="serv_3_title">Komplett paket</h3>
-        <p class="service-desc" data-i18n="serv_3_desc">Allt utvändigt och invändigt arbete i ett paket. Maximal effekt på slutpriset.</p>
+        <p class="service-desc" data-i18n="serv_3_desc">Allt utvändigt och invändigt arbete för försäljningsförberedelse i ett paket. Maximal effekt på slutpriset.</p>
         <ul class="service-list">
           <li data-i18n="serv_3_l1">Allt som ingår i utvändigt paket</li>
           <li data-i18n="serv_3_l2">Allt som ingår i invändigt paket</li>
           <li data-i18n="serv_3_l3">Samordning av alla arbeten i rätt ordning</li>
           <li data-i18n="serv_3_l4">En enda kontaktperson genom hela projektet</li>
-          <li data-i18n="serv_3_l5">Slutstädning innan visning</li>
+          <li data-i18n="serv_3_l5">Slutstädning innan visning för köpare</li>
           <li data-i18n="serv_3_l6">Råd om presentation och styling</li>
           <li data-i18n="serv_3_l7">Ger oftast störst prisökning</li>
         </ul>
-        <p class="service-note" data-i18n="serv_3_note">Rekommenderas för hus som behöver en helhetsuppfräschning.</p>
+        <p class="service-note" data-i18n="serv_3_note">Rekommenderas för hus som behöver en helhetsuppfräschning inför försäljning.</p>
       </div>
 
       <!-- Indoor -->
-      <div class="service-card reveal reveal-delay-3">
+      <div class="service-card reveal reveal-delay-3" data-modal="modal-indoor" role="button" tabindex="0">
         <div class="service-icon">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 10l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V10z"/>
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 22V12h6v10"/>
           </svg>
         </div>
-        <h3 data-i18n="serv_2_title">Invändigt arbete</h3>
-        <p class="service-desc" data-i18n="serv_2_desc">Vi fräschar upp insidan så att huset känns ljust, rent och redo att flytta in i.</p>
+        <h3 data-i18n="serv_2_title">Inre arbete</h3>
+        <p class="service-desc" data-i18n="serv_2_desc">Så att interiören känns fräsch, ren och redo att tas över av en ny ägare.</p>
         <ul class="service-list">
           <li data-i18n="serv_2_l1">Storstädning av hela huset</li>
-          <li data-i18n="serv_2_l2">Demontering av gamla möbler, kök och ytskikt</li>
-          <li data-i18n="serv_2_l3">Bortforsling av sopor och inventarier</li>
-          <li data-i18n="serv_2_l4">Plattläggning i badrum och hall</li>
-          <li data-i18n="serv_2_l5">Montering av nytt kök</li>
-          <li data-i18n="serv_2_l6">Allmänna byggarbeten och reparationer</li>
-          <li data-i18n="serv_2_l7">Mindre justeringar av väggar, dörrar och lister</li>
+          <li data-i18n="serv_2_l2">Fönstertvätt in- och utvändigt</li>
+          <li data-i18n="serv_2_l3">Borttagning av damm, spindelnät och fukt i hörn</li>
+          <li data-i18n="serv_2_l4">Rengöring av mattor och stoppade möbler</li>
+          <li data-i18n="serv_2_l5">Glansrengöring av kök, badrum och toaletter</li>
+          <li data-i18n="serv_2_l6">Snabba bättringar på väggar — fläckar och märken</li>
+          <li data-i18n="serv_2_l7">Borttransport av onödiga saker och bråte</li>
+          <li data-i18n="serv_2_l8">Styling och ompositionering inför annonsfoton</li>
         </ul>
-        <p class="service-note" data-i18n="serv_2_note">Vi utför inte VVS, el eller andra licensierade arbeten — vi hänvisar till godkända partners om det behövs.</p>
+        <p class="service-note" data-i18n="serv_2_note">Köparen ska kliva in och känna — här vill jag bo.</p>
       </div>
     </div>
   </div>
@@ -1749,8 +1933,8 @@
           </svg>
         </div>
         <div>
-          <h3 data-i18n="why_2_title">Familjeföretag — far och son</h3>
-          <p data-i18n="why_2_desc">Vi är inte en stor entreprenör. Det är vi två som kommer hem till dig, gör jobbet och tar ansvar för resultatet. Inga underleverantörer, inga överraskningar.</p>
+          <h3 data-i18n="why_2_title">Professionellt team</h3>
+          <p data-i18n="why_2_desc">Vi är ett litet team av specialister som kan sitt jobb. Vi gör allt själva — inga underleverantörer, inga överraskningar. Varje projekt har en ansvarig kontaktperson.</p>
         </div>
       </div>
       <div class="why-card reveal reveal-delay-3">
@@ -1872,44 +2056,189 @@
     <p class="contact-sub reveal reveal-delay-2" data-i18n="contact_sub">Hör av dig idag — vi gör en kostnadsfri bedömning av ditt hus och berättar exakt hur mycket du kan tjäna.</p>
 
     <div class="contact-grid">
-      <a href="tel:+46000000000" class="contact-card reveal reveal-delay-1">
+      <a href="tel:+46700149644" class="contact-card reveal reveal-delay-1">
         <div class="contact-icon">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
           </svg>
         </div>
         <div class="contact-label" data-i18n="contact_phone">Telefon</div>
-        <div class="contact-value">+46 (0)00 000 00 00</div>
+        <div class="contact-value">+46 70 014 96 44</div>
       </a>
-      <a href="mailto:hello@bondar.se" class="contact-card reveal reveal-delay-2">
+      <a href="mailto:info@bondar.se" class="contact-card reveal reveal-delay-2">
         <div class="contact-icon">
           <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
         </div>
         <div class="contact-label" data-i18n="contact_email">E-post</div>
-        <div class="contact-value">hello@bondar.se</div>
+        <div class="contact-value">info@bondar.se</div>
       </a>
-      <a href="#" class="contact-card reveal reveal-delay-3">
+      <a href="https://instagram.com/bondar.se" target="_blank" rel="noopener noreferrer" class="contact-card reveal reveal-delay-3">
         <div class="contact-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h6m6 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-1l1 4z"/>
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
           </svg>
         </div>
-        <div class="contact-label" data-i18n="contact_social">Sociala medier</div>
-        <div class="contact-value">@bondar</div>
+        <div class="contact-label" data-i18n="contact_social">Instagram</div>
+        <div class="contact-value">bondar.se</div>
       </a>
     </div>
 
     <div class="contact-person reveal">
       <div class="contact-avatar">D</div>
       <div class="contact-person-info">
-        <div class="contact-person-name">Daniel</div>
-        <div class="contact-person-role" data-i18n="contact_role">Din kontaktperson hos Bondar</div>
+        <div class="contact-person-name">Daniel Bondar</div>
+        <div class="contact-person-role" data-i18n="contact_role">Projektledare</div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ===== Service modals ===== -->
+<div class="modal" id="modal-outdoor" aria-hidden="true" role="dialog" aria-labelledby="modal-outdoor-title">
+  <div class="modal-overlay" data-modal-close></div>
+  <div class="modal-content">
+    <button class="modal-close" data-modal-close aria-label="Close">×</button>
+    <h3 id="modal-outdoor-title" data-i18n="serv_1_title">Utvändigt arbete</h3>
+    <p class="modal-desc" data-i18n="serv_1_desc"></p>
+    <h4 data-i18n="modal_includes">Vad ingår</h4>
+    <ul class="modal-list">
+      <li data-i18n="serv_1_l1"></li>
+      <li data-i18n="serv_1_l2"></li>
+      <li data-i18n="serv_1_l3"></li>
+      <li data-i18n="serv_1_l4"></li>
+      <li data-i18n="serv_1_l5"></li>
+      <li data-i18n="serv_1_l6"></li>
+      <li data-i18n="serv_1_l7"></li>
+      <li data-i18n="modal_outdoor_l8"></li>
+      <li data-i18n="modal_outdoor_l9"></li>
+    </ul>
+    <h4 data-i18n="modal_get_title">Vad du får</h4>
+    <div class="modal-benefits">
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <span data-i18n="modal_outdoor_b1"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <span data-i18n="modal_outdoor_b2"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        <span data-i18n="modal_outdoor_b3"></span>
+      </div>
+    </div>
+    <h4 data-i18n="modal_how_title">Så går det till</h4>
+    <ol class="modal-steps">
+      <li data-i18n="modal_outdoor_s1"></li>
+      <li data-i18n="modal_outdoor_s2"></li>
+      <li data-i18n="modal_outdoor_s3"></li>
+    </ol>
+    <a href="#contact" class="btn btn-primary modal-cta" data-modal-close>
+      <span data-i18n="modal_cta">Kontakta oss</span>
+      <span class="btn-arrow">→</span>
+    </a>
+    <button class="modal-close-link" data-modal-close data-i18n="modal_close">Stäng</button>
+  </div>
+</div>
+
+<div class="modal" id="modal-full" aria-hidden="true" role="dialog" aria-labelledby="modal-full-title">
+  <div class="modal-overlay" data-modal-close></div>
+  <div class="modal-content">
+    <button class="modal-close" data-modal-close aria-label="Close">×</button>
+    <h3 id="modal-full-title" data-i18n="serv_3_title">Komplett paket</h3>
+    <p class="modal-desc" data-i18n="serv_3_desc"></p>
+    <h4 data-i18n="modal_includes">Vad ingår</h4>
+    <ul class="modal-list">
+      <li data-i18n="serv_3_l1"></li>
+      <li data-i18n="serv_3_l2"></li>
+      <li data-i18n="serv_3_l3"></li>
+      <li data-i18n="serv_3_l4"></li>
+      <li data-i18n="serv_3_l5"></li>
+      <li data-i18n="serv_3_l6"></li>
+      <li data-i18n="serv_3_l7"></li>
+      <li data-i18n="modal_full_l8"></li>
+      <li data-i18n="modal_full_l9"></li>
+    </ul>
+    <h4 data-i18n="modal_get_title">Vad du får</h4>
+    <div class="modal-benefits">
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span data-i18n="modal_full_b1"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5a4 4 0 11-8 0 4 4 0 018 0zm6 3a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <span data-i18n="modal_full_b2"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <span data-i18n="modal_full_b3"></span>
+      </div>
+    </div>
+    <h4 data-i18n="modal_how_title">Så går det till</h4>
+    <ol class="modal-steps">
+      <li data-i18n="modal_full_s1"></li>
+      <li data-i18n="modal_full_s2"></li>
+      <li data-i18n="modal_full_s3"></li>
+    </ol>
+    <a href="#contact" class="btn btn-primary modal-cta" data-modal-close>
+      <span data-i18n="modal_cta">Kontakta oss</span>
+      <span class="btn-arrow">→</span>
+    </a>
+    <button class="modal-close-link" data-modal-close data-i18n="modal_close">Stäng</button>
+  </div>
+</div>
+
+<div class="modal" id="modal-indoor" aria-hidden="true" role="dialog" aria-labelledby="modal-indoor-title">
+  <div class="modal-overlay" data-modal-close></div>
+  <div class="modal-content">
+    <button class="modal-close" data-modal-close aria-label="Close">×</button>
+    <h3 id="modal-indoor-title" data-i18n="serv_2_title">Inre arbete</h3>
+    <p class="modal-desc" data-i18n="serv_2_desc"></p>
+    <h4 data-i18n="modal_includes">Vad ingår</h4>
+    <ul class="modal-list">
+      <li data-i18n="serv_2_l1"></li>
+      <li data-i18n="serv_2_l2"></li>
+      <li data-i18n="serv_2_l3"></li>
+      <li data-i18n="serv_2_l4"></li>
+      <li data-i18n="serv_2_l5"></li>
+      <li data-i18n="serv_2_l6"></li>
+      <li data-i18n="serv_2_l7"></li>
+      <li data-i18n="serv_2_l8"></li>
+      <li data-i18n="modal_indoor_l9"></li>
+      <li data-i18n="modal_indoor_l10"></li>
+    </ul>
+    <h4 data-i18n="modal_get_title">Vad du får</h4>
+    <div class="modal-benefits">
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V10z"/><path d="M9 22V12h6v10"/></svg>
+        <span data-i18n="modal_indoor_b1"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span data-i18n="modal_indoor_b2"></span>
+      </div>
+      <div class="modal-benefit">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span data-i18n="modal_indoor_b3"></span>
+      </div>
+    </div>
+    <h4 data-i18n="modal_how_title">Så går det till</h4>
+    <ol class="modal-steps">
+      <li data-i18n="modal_indoor_s1"></li>
+      <li data-i18n="modal_indoor_s2"></li>
+      <li data-i18n="modal_indoor_s3"></li>
+    </ol>
+    <a href="#contact" class="btn btn-primary modal-cta" data-modal-close>
+      <span data-i18n="modal_cta">Kontakta oss</span>
+      <span class="btn-arrow">→</span>
+    </a>
+    <button class="modal-close-link" data-modal-close data-i18n="modal_close">Stäng</button>
+  </div>
+</div>
 
 <footer>
   <div class="footer-inner">
@@ -1928,7 +2257,6 @@ const translations = {
     nav_faq: "FAQ",
     nav_contact: "Kontakt",
 
-    hero_tag: "Familjeföretag i Sverige",
     hero_title_line1: "Sälj ditt hus",
     hero_title_line2: "snabbare och dyrare",
     hero_title_line3: "— utan förskott",
@@ -1937,7 +2265,7 @@ const translations = {
     hero_btn_2: "Hur det fungerar",
     stat_1: "Förskott från dig",
     stat_2: "Genomsnittlig prisökning",
-    stat_3: "Generationer i samma team",
+    stat_3: "Team av yrkesfolk",
 
     how_eyebrow: "Processen",
     how_title: "Hur det fungerar — fyra enkla steg",
@@ -1947,7 +2275,7 @@ const translations = {
     step_2_title: "Vi gör en bedömning",
     step_2_desc: "Vi tar fram en lista över vad som behöver göras och hur mycket prishöjningen i annonsen bör vara. Du bestämmer själv om du vill gå vidare.",
     step_3_title: "Vi utför arbetet",
-    step_3_desc: "Far och son tar hand om allt — utvändigt, invändigt eller båda delarna. Vi använder egen utrustning och egna material.",
+    step_3_desc: "Vårt team utför allt arbete professionellt — vi har egen utrustning och egna material.",
     step_4_title: "Du betalar efter försäljningen",
     step_4_desc: "När huset är sålt betalar du oss skillnaden mellan det ursprungliga och det höjda priset. Du får tillbaka det du tänkt — vi får vår ersättning.",
 
@@ -1978,35 +2306,36 @@ const translations = {
     serv_1_l7: "Sortering och uppstädning av tomten",
     serv_1_note: "Bäst för hus där grunden är bra men trädgården behöver kärlek.",
 
-    serv_2_title: "Invändigt arbete",
-    serv_2_desc: "Vi fräschar upp insidan så att huset känns ljust, rent och redo att flytta in i.",
+    serv_2_title: "Inre arbete",
+    serv_2_desc: "Så att interiören känns fräsch, ren och redo att tas över av en ny ägare.",
     serv_2_l1: "Storstädning av hela huset",
-    serv_2_l2: "Demontering av gamla möbler, kök och ytskikt",
-    serv_2_l3: "Bortforsling av sopor och inventarier",
-    serv_2_l4: "Plattläggning i badrum och hall",
-    serv_2_l5: "Montering av nytt kök",
-    serv_2_l6: "Allmänna byggarbeten och reparationer",
-    serv_2_l7: "Mindre justeringar av väggar, dörrar och lister",
-    serv_2_note: "Vi utför inte VVS, el eller andra licensierade arbeten — vi hänvisar till godkända partners om det behövs.",
+    serv_2_l2: "Fönstertvätt in- och utvändigt",
+    serv_2_l3: "Borttagning av damm, spindelnät och fukt i hörn",
+    serv_2_l4: "Rengöring av mattor och stoppade möbler",
+    serv_2_l5: "Glansrengöring av kök, badrum och toaletter",
+    serv_2_l6: "Snabba bättringar på väggar — fläckar och märken",
+    serv_2_l7: "Borttransport av onödiga saker och bråte",
+    serv_2_l8: "Styling och ompositionering inför annonsfoton",
+    serv_2_note: "Köparen ska kliva in och känna — här vill jag bo.",
 
     serv_3_title: "Komplett paket",
-    serv_3_desc: "Allt utvändigt och invändigt arbete i ett paket. Maximal effekt på slutpriset.",
+    serv_3_desc: "Allt utvändigt och invändigt arbete för försäljningsförberedelse i ett paket. Maximal effekt på slutpriset.",
     serv_3_l1: "Allt som ingår i utvändigt paket",
     serv_3_l2: "Allt som ingår i invändigt paket",
     serv_3_l3: "Samordning av alla arbeten i rätt ordning",
     serv_3_l4: "En enda kontaktperson genom hela projektet",
-    serv_3_l5: "Slutstädning innan visning",
+    serv_3_l5: "Slutstädning innan visning för köpare",
     serv_3_l6: "Råd om presentation och styling",
     serv_3_l7: "Ger oftast störst prisökning",
-    serv_3_note: "Rekommenderas för hus som behöver en helhetsuppfräschning.",
+    serv_3_note: "Rekommenderas för hus som behöver en helhetsuppfräschning inför försäljning.",
 
     why_eyebrow: "Varför Bondar",
     why_title: "Du tjänar mer — utan att riskera något",
     why_sub: "Vi jobbar på ett annorlunda sätt. Här är varför våra kunder rekommenderar oss vidare.",
     why_1_title: "Noll risk för dig",
     why_1_desc: "Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. All ekonomisk risk ligger hos oss, inte hos dig.",
-    why_2_title: "Familjeföretag — far och son",
-    why_2_desc: "Vi är inte en stor entreprenör. Det är vi två som kommer hem till dig, gör jobbet och tar ansvar för resultatet. Inga underleverantörer, inga överraskningar.",
+    why_2_title: "Professionellt team",
+    why_2_desc: "Vi är ett litet team av specialister som kan sitt jobb. Vi gör allt själva — inga underleverantörer, inga överraskningar. Varje projekt har en ansvarig kontaktperson.",
     why_3_title: "Erfarenhet av husförsäljning",
     why_3_desc: "Vi har sett många hus och vet vad köpare letar efter. Vi gör inte mer än det som behövs — och inte mindre. Smart prioritering ger bäst avkastning.",
     why_4_title: "Kvalitetsgaranti",
@@ -2037,9 +2366,42 @@ const translations = {
     contact_sub: "Hör av dig idag — vi gör en kostnadsfri bedömning av ditt hus och berättar exakt hur mycket du kan tjäna.",
     contact_phone: "Telefon",
     contact_email: "E-post",
-    contact_social: "Sociala medier",
-    contact_role: "Din kontaktperson hos Bondar",
-    footer_rights: "Alla rättigheter förbehållna."
+    contact_social: "Instagram",
+    contact_role: "Projektledare",
+    footer_rights: "Alla rättigheter förbehållna.",
+
+    modal_includes: "Vad ingår",
+    modal_get_title: "Vad du får",
+    modal_how_title: "Så går det till",
+    modal_cta: "Kontakta oss",
+    modal_close: "Stäng",
+
+    modal_outdoor_l8: "Småbuskar och blomrabatter snyggas till",
+    modal_outdoor_l9: "Justering av små lutande markdetaljer",
+    modal_outdoor_b1: "Bättre första intryck från gatan",
+    modal_outdoor_b2: "Tomten ser omhändertagen ut",
+    modal_outdoor_b3: "Snabbare köpintresse vid visningar",
+    modal_outdoor_s1: "Vi besöker dig och bedömer tomten",
+    modal_outdoor_s2: "Vi utför alla utvändiga arbeten",
+    modal_outdoor_s3: "Tomten är redo för fotografering och visning",
+
+    modal_full_l8: "Fokus på trädgård, fasad, interiör och presentation",
+    modal_full_l9: "Anpassas efter just ditt hus och dina mål",
+    modal_full_b1: "Maximalt prispåslag vid försäljning",
+    modal_full_b2: "En kontaktperson genom hela processen",
+    modal_full_b3: "Helt avlastat förberedelsearbete",
+    modal_full_s1: "Kostnadsfri besiktning av huset",
+    modal_full_s2: "Komplett förberedelse in- och utvändigt",
+    modal_full_s3: "Klart för fotografering och annonsering",
+
+    modal_indoor_l9: "Lätt fräschning av handtag och beslag",
+    modal_indoor_l10: "Anpassad styling per rum för bästa annonsfoto",
+    modal_indoor_b1: "Köpklar känsla för besökaren",
+    modal_indoor_b2: "Ljusa, rena och inbjudande ytor",
+    modal_indoor_b3: "Foton som faktiskt säljer",
+    modal_indoor_s1: "Genomgång av hela huset och plan",
+    modal_indoor_s2: "Storstädning och bortforsling av bråte",
+    modal_indoor_s3: "Sista styling inför fotografering"
   },
 
   en: {
@@ -2049,7 +2411,6 @@ const translations = {
     nav_faq: "FAQ",
     nav_contact: "Contact",
 
-    hero_tag: "Family business in Sweden",
     hero_title_line1: "Sell your house",
     hero_title_line2: "faster and for more",
     hero_title_line3: "— without paying upfront",
@@ -2058,7 +2419,7 @@ const translations = {
     hero_btn_2: "How it works",
     stat_1: "Upfront payment",
     stat_2: "Average price increase",
-    stat_3: "Generations in one team",
+    stat_3: "Team of professionals",
 
     how_eyebrow: "The process",
     how_title: "How it works — four simple steps",
@@ -2068,7 +2429,7 @@ const translations = {
     step_2_title: "We make an assessment",
     step_2_desc: "We prepare a list of what needs to be done and how much the listing price should be raised. You decide whether to move forward.",
     step_3_title: "We do the work",
-    step_3_desc: "Father and son handle everything — outside, inside, or both. We bring our own equipment and materials.",
+    step_3_desc: "Our team handles all work professionally — we bring our own equipment and materials.",
     step_4_title: "You pay after the sale",
     step_4_desc: "When the house is sold, you pay us the difference between the original and the raised price. You receive what you originally wanted — we get our fee.",
 
@@ -2100,34 +2461,35 @@ const translations = {
     serv_1_note: "Best for homes where the basics are good but the garden needs attention.",
 
     serv_2_title: "Indoor work",
-    serv_2_desc: "We refresh the inside so the house feels bright, clean and move-in ready.",
+    serv_2_desc: "So the interior feels fresh, clean and ready for a new owner.",
     serv_2_l1: "Deep cleaning of the entire house",
-    serv_2_l2: "Demolition of old furniture, kitchens and surfaces",
-    serv_2_l3: "Removal of waste and clutter",
-    serv_2_l4: "Tiling in bathroom and hallway",
-    serv_2_l5: "Installation of new kitchens",
-    serv_2_l6: "General construction and repairs",
-    serv_2_l7: "Minor adjustments to walls, doors and trims",
-    serv_2_note: "We do not perform plumbing, electrical or other licensed work — we refer you to certified partners when needed.",
+    serv_2_l2: "Window washing inside and out",
+    serv_2_l3: "Removal of dust, cobwebs and damp in corners",
+    serv_2_l4: "Carpet and upholstery cleaning",
+    serv_2_l5: "Sparkling clean kitchen, bathroom and toilets",
+    serv_2_l6: "Touching up small marks and stains on walls",
+    serv_2_l7: "Removing unwanted items and clutter",
+    serv_2_l8: "Styling and arranging for listing photos",
+    serv_2_note: "The buyer should walk in and feel — this is where I want to live.",
 
     serv_3_title: "Complete package",
-    serv_3_desc: "All outdoor and indoor work bundled together. Maximum effect on the final price.",
+    serv_3_desc: "All outdoor and indoor pre-sale preparation in one package. Maximum effect on the final price.",
     serv_3_l1: "Everything in the outdoor package",
     serv_3_l2: "Everything in the indoor package",
     serv_3_l3: "Coordination of all work in the right order",
     serv_3_l4: "One single contact person throughout the project",
-    serv_3_l5: "Final clean before viewing",
+    serv_3_l5: "Final clean before buyer viewings",
     serv_3_l6: "Advice on presentation and styling",
     serv_3_l7: "Usually delivers the largest price increase",
-    serv_3_note: "Recommended for houses that need a full refresh.",
+    serv_3_note: "Recommended for houses that need a full refresh before selling.",
 
     why_eyebrow: "Why Bondar",
     why_title: "Earn more — without taking any risk",
     why_sub: "We work differently. Here's why our clients keep recommending us.",
     why_1_title: "Zero risk for you",
     why_1_desc: "You never pay us upfront. If the house doesn't sell — we don't get paid either. All financial risk sits with us, not with you.",
-    why_2_title: "Family business — father and son",
-    why_2_desc: "We're not a large contractor. It's the two of us coming to your home, doing the work and taking responsibility. No subcontractors, no surprises.",
+    why_2_title: "Professional team",
+    why_2_desc: "We're a small team of specialists who know our craft. We handle every job ourselves — no subcontractors, no surprises. Every project has one dedicated point of contact.",
     why_3_title: "Experience in selling houses",
     why_3_desc: "We've seen many homes and know what buyers look for. We don't do more than what's needed — and not less. Smart prioritisation gives the best return.",
     why_4_title: "Quality guarantee",
@@ -2158,9 +2520,42 @@ const translations = {
     contact_sub: "Reach out today — we'll do a free assessment of your house and tell you exactly how much you can earn.",
     contact_phone: "Phone",
     contact_email: "Email",
-    contact_social: "Social media",
-    contact_role: "Your contact person at Bondar",
-    footer_rights: "All rights reserved."
+    contact_social: "Instagram",
+    contact_role: "Project Manager",
+    footer_rights: "All rights reserved.",
+
+    modal_includes: "What's included",
+    modal_get_title: "What you get",
+    modal_how_title: "How it works",
+    modal_cta: "Contact us",
+    modal_close: "Close",
+
+    modal_outdoor_l8: "Tidying up small bushes and flower beds",
+    modal_outdoor_l9: "Levelling minor sloping ground details",
+    modal_outdoor_b1: "Better first impression from the street",
+    modal_outdoor_b2: "Property looks well cared for",
+    modal_outdoor_b3: "Faster buyer interest during viewings",
+    modal_outdoor_s1: "We visit and assess your property",
+    modal_outdoor_s2: "We do all the outdoor preparation",
+    modal_outdoor_s3: "Property ready for photos and viewings",
+
+    modal_full_l8: "Focus on garden, façade, interior and presentation",
+    modal_full_l9: "Tailored to your specific house and goals",
+    modal_full_b1: "Maximum price increase at sale",
+    modal_full_b2: "One contact person through the whole process",
+    modal_full_b3: "Worry-free preparation, all handled for you",
+    modal_full_s1: "Free property assessment",
+    modal_full_s2: "Full preparation inside and out",
+    modal_full_s3: "Ready for photos and listing",
+
+    modal_indoor_l9: "Light refresh of handles and fittings",
+    modal_indoor_l10: "Custom styling per room for best listing photos",
+    modal_indoor_b1: "Move-in ready feel for visitors",
+    modal_indoor_b2: "Bright, clean and inviting surfaces",
+    modal_indoor_b3: "Listing photos that actually sell",
+    modal_indoor_s1: "Walk-through and detailed plan",
+    modal_indoor_s2: "Deep cleaning and decluttering",
+    modal_indoor_s3: "Final styling before the photoshoot"
   },
 
   ru: {
@@ -2170,7 +2565,6 @@ const translations = {
     nav_faq: "Вопросы",
     nav_contact: "Контакты",
 
-    hero_tag: "Семейный бизнес в Швеции",
     hero_title_line1: "Продайте свой дом",
     hero_title_line2: "быстрее и дороже",
     hero_title_line3: "— без предоплаты",
@@ -2179,7 +2573,7 @@ const translations = {
     hero_btn_2: "Как это работает",
     stat_1: "Предоплата от вас",
     stat_2: "Средний прирост цены",
-    stat_3: "Поколения в одной команде",
+    stat_3: "Команда профессионалов",
 
     how_eyebrow: "Процесс",
     how_title: "Как это работает — четыре простых шага",
@@ -2189,7 +2583,7 @@ const translations = {
     step_2_title: "Мы оцениваем работу",
     step_2_desc: "Готовим список необходимых работ и определяем, на сколько стоит поднять цену в объявлении. Решение идти дальше — за вами.",
     step_3_title: "Мы делаем работу",
-    step_3_desc: "Отец и сын делают всё сами — снаружи, внутри или и то и другое. У нас своё оборудование и материалы.",
+    step_3_desc: "Наша команда выполняет все работы профессионально, у нас своё оборудование и материалы.",
     step_4_title: "Вы платите после продажи",
     step_4_desc: "Когда дом продан, вы платите нам разницу между исходной и новой ценой. Вы получаете ту сумму, которую планировали получить — мы получаем своё вознаграждение.",
 
@@ -2221,34 +2615,35 @@ const translations = {
     serv_1_note: "Подходит, если дом сам по себе в порядке, но участок требует внимания.",
 
     serv_2_title: "Внутренние работы",
-    serv_2_desc: "Освежаем интерьер, чтобы дом казался светлым, чистым и готовым к заселению.",
+    serv_2_desc: "Чтобы интерьер выглядел свежим, чистым и готовым принять нового хозяина.",
     serv_2_l1: "Генеральная уборка всего дома",
-    serv_2_l2: "Демонтаж старой мебели, кухни и отделки",
-    serv_2_l3: "Вывоз мусора и ненужных вещей",
-    serv_2_l4: "Укладка плитки в ванной и прихожей",
-    serv_2_l5: "Установка новых кухонь",
-    serv_2_l6: "Общестроительные работы и мелкий ремонт",
-    serv_2_l7: "Подгонка стен, дверей и плинтусов",
-    serv_2_note: "Сантехнику, электрику и другие лицензируемые работы мы не выполняем — при необходимости рекомендуем проверенных специалистов.",
+    serv_2_l2: "Мойка окон изнутри и снаружи",
+    serv_2_l3: "Уборка пыли, паутины, плесени в углах",
+    serv_2_l4: "Чистка ковров и мягкой мебели",
+    serv_2_l5: "Мытьё кухни, ванной и санузлов до блеска",
+    serv_2_l6: "Освежение стен от мелких следов и пятен",
+    serv_2_l7: "Вынос ненужных вещей и хлама",
+    serv_2_l8: "Расстановка для красивых фото в объявлении",
+    serv_2_note: "Покупатель должен войти и почувствовать — здесь хочется жить.",
 
     serv_3_title: "Полный комплекс",
-    serv_3_desc: "Все внешние и внутренние работы в одном пакете. Максимальный эффект на конечную цену.",
+    serv_3_desc: "Все внешние и внутренние работы по предпродажной подготовке в одном пакете. Максимальный эффект на конечную цену.",
     serv_3_l1: "Всё, что входит во внешний пакет",
     serv_3_l2: "Всё, что входит во внутренний пакет",
     serv_3_l3: "Согласование всех работ в правильной последовательности",
     serv_3_l4: "Одно контактное лицо на весь проект",
-    serv_3_l5: "Финальная уборка перед показом",
+    serv_3_l5: "Финальная уборка перед показом покупателям",
     serv_3_l6: "Рекомендации по презентации и стилю",
     serv_3_l7: "Чаще всего даёт самый большой прирост цены",
-    serv_3_note: "Рекомендуется для домов, которым нужно комплексное обновление.",
+    serv_3_note: "Рекомендуется для домов, которым нужно комплексное обновление перед продажей.",
 
     why_eyebrow: "Почему Bondar",
     why_title: "Вы зарабатываете больше — без всякого риска",
     why_sub: "Мы работаем по-другому. Вот почему наши клиенты рекомендуют нас друзьям.",
     why_1_title: "Нулевой риск для вас",
     why_1_desc: "Вы никогда не платите нам заранее. Если дом не продан — мы тоже ничего не получаем. Весь финансовый риск на нас, а не на вас.",
-    why_2_title: "Семейный бизнес — отец и сын",
-    why_2_desc: "Мы не большая фирма. К вам приедем именно мы вдвоём, мы делаем работу и отвечаем за результат. Никаких субподрядчиков и никаких сюрпризов.",
+    why_2_title: "Профессиональная команда",
+    why_2_desc: "Мы небольшая команда специалистов, которая знает свою работу. Всё делаем сами — без субподрядчиков и сюрпризов. Каждый проект ведёт один ответственный человек.",
     why_3_title: "Опыт продажи домов",
     why_3_desc: "Мы видели много домов и знаем, на что смотрят покупатели. Не делаем лишнего — и не оставляем недоделанного. Грамотные приоритеты дают лучший результат.",
     why_4_title: "Гарантия качества",
@@ -2279,9 +2674,42 @@ const translations = {
     contact_sub: "Свяжитесь с нами уже сегодня — мы бесплатно оценим ваш дом и расскажем, сколько именно вы можете заработать.",
     contact_phone: "Телефон",
     contact_email: "Электронная почта",
-    contact_social: "Соцсети",
-    contact_role: "Ваше контактное лицо в Bondar",
-    footer_rights: "Все права защищены."
+    contact_social: "Instagram",
+    contact_role: "Менеджер проектов",
+    footer_rights: "Все права защищены.",
+
+    modal_includes: "Что входит",
+    modal_get_title: "Что вы получаете",
+    modal_how_title: "Как это работает",
+    modal_cta: "Связаться с нами",
+    modal_close: "Закрыть",
+
+    modal_outdoor_l8: "Подравнивание мелких кустов и клумб",
+    modal_outdoor_l9: "Выравнивание небольших неровностей участка",
+    modal_outdoor_b1: "Лучшее первое впечатление с улицы",
+    modal_outdoor_b2: "Участок выглядит ухоженным",
+    modal_outdoor_b3: "Быстрый интерес покупателей на показах",
+    modal_outdoor_s1: "Приезжаем и оцениваем участок",
+    modal_outdoor_s2: "Делаем все внешние работы",
+    modal_outdoor_s3: "Участок готов к фото и показам",
+
+    modal_full_l8: "Фокус на сад, фасад, интерьер и подачу",
+    modal_full_l9: "Подстраиваем под ваш дом и ваши цели",
+    modal_full_b1: "Максимальный прирост цены при продаже",
+    modal_full_b2: "Одно контактное лицо на весь проект",
+    modal_full_b3: "Полностью освобождает вас от подготовки",
+    modal_full_s1: "Бесплатная оценка дома",
+    modal_full_s2: "Полная подготовка внутри и снаружи",
+    modal_full_s3: "Готово к фотосессии и публикации",
+
+    modal_indoor_l9: "Лёгкое обновление ручек и фурнитуры",
+    modal_indoor_l10: "Индивидуальный стайлинг каждой комнаты под фото",
+    modal_indoor_b1: "Ощущение готового дома при входе",
+    modal_indoor_b2: "Светлые, чистые и приветливые поверхности",
+    modal_indoor_b3: "Фото в объявлении, которые реально продают",
+    modal_indoor_s1: "Осмотр дома и план работ",
+    modal_indoor_s2: "Генеральная уборка и вывоз хлама",
+    modal_indoor_s3: "Финальный стайлинг перед фотосессией"
   }
 };
 
@@ -2366,6 +2794,46 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== Service modals =====
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+function closeModal(modal) {
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  if (!document.querySelector('.modal.open')) {
+    document.body.classList.remove('modal-open');
+  }
+}
+document.querySelectorAll('.service-card[data-modal]').forEach(card => {
+  const id = card.dataset.modal;
+  card.addEventListener('click', () => openModal(id));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal(id);
+    }
+  });
+});
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target.closest('[data-modal-close]')) {
+      closeModal(modal);
+    }
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const opened = document.querySelector('.modal.open');
+    if (opened) closeModal(opened);
+  }
+});
 
 // ===== Theme: time of day + season =====
 const TIME_CLASSES = ['time-morning', 'time-day', 'time-evening', 'time-night'];
@@ -2492,20 +2960,6 @@ function spawnSnowflakes(layer) {
   }
 }
 
-function createCloudShadows(parent, count) {
-  for (let i = 0; i < count; i++) {
-    const c = document.createElement('div');
-    c.className = 'weather-cloud-shadow';
-    c.style.top = (5 + Math.random() * 80) + 'vh';
-    c.style.animationDuration = (45 + Math.random() * 40).toFixed(0) + 's';
-    c.style.animationDelay = (-Math.random() * 60).toFixed(0) + 's';
-    c.style.opacity = (0.35 + Math.random() * 0.4).toFixed(2);
-    const scale = (0.6 + Math.random() * 0.9).toFixed(2);
-    c.style.transform = 'scale(' + scale + ')';
-    parent.appendChild(c);
-  }
-}
-
 function scheduleThunderFlashes(flashEl) {
   function fire() {
     flashEl.classList.remove('flashing');
@@ -2537,7 +2991,7 @@ function applyWeather(type) {
   } else if (type === 'snow') {
     spawnSnowflakes(weatherLayer);
   } else if (type === 'clouds') {
-    createCloudShadows(weatherLayer, 6);
+    /* No visual particles — body.weather-clouds class is set above for any minor tint */
   } else if (type === 'clear') {
     const sun = document.createElement('div');
     sun.className = 'weather-sun-overlay';
@@ -2584,7 +3038,6 @@ setInterval(updateWeather, 30 * 60 * 1000);
       <button data-debug-weather="rain">Rain</button>
       <button data-debug-weather="snow">Snow</button>
       <button data-debug-weather="clear">Sun</button>
-      <button data-debug-weather="clouds">Clouds</button>
       <button data-debug-weather="thunder">Thunder</button>
     </div>
     <div class="debug-row">

@@ -860,6 +860,184 @@
     color: rgba(255,255,255,0.78);
     line-height: 1.55;
   }
+  .example-note {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: 720px;
+    margin: 36px auto 0;
+    font-style: italic;
+  }
+
+  /* ===== Intro block (When a house is worth more) ===== */
+  .intro-block {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .intro-block h2 { margin-bottom: 24px; }
+  .intro-block p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  /* ===== Contract & Honest sections (calm highlight blocks) ===== */
+  .calm-block {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+  }
+  .calm-icon {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    background: var(--green-soft);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+  }
+  .calm-icon svg { width: 26px; height: 26px; }
+  .calm-block h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .calm-block p {
+    color: var(--text-soft);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+  .honest-block {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .honest-block h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    margin-bottom: 20px;
+    color: var(--text-soft);
+  }
+  .honest-block p {
+    color: var(--text-soft);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* ===== Win flip cards ===== */
+  .win-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .win-card {
+    perspective: 1200px;
+    cursor: pointer;
+    height: 360px;
+  }
+  .win-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .win-card.flipped .win-card-inner {
+    transform: rotateY(180deg);
+  }
+  .win-face {
+    position: absolute;
+    inset: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease, border-color 0.5s ease;
+    box-sizing: border-box;
+  }
+  .win-front {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .win-back {
+    transform: rotateY(180deg);
+    text-align: left;
+    overflow-y: auto;
+    gap: 12px;
+  }
+  .win-card:not(.flipped):hover .win-front {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(59, 107, 78, 0.12);
+    border-color: var(--accent);
+  }
+  .win-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: var(--green-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  }
+  .win-icon svg { width: 32px; height: 32px; }
+  .win-card:not(.flipped):hover .win-icon {
+    background: var(--accent);
+    color: #fff;
+    transform: scale(1.08);
+  }
+  .win-front h3 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .win-hint {
+    color: var(--text-soft);
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+  .win-back h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .win-back ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .win-back li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .win-back li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
 
   /* ===== FAQ ===== */
   .faq-list {
@@ -1085,10 +1263,13 @@
     .services-grid,
     .why-grid,
     .example-grid,
+    .win-grid,
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 16px;
     }
+    .calm-block { padding: 28px 24px; flex-direction: column; gap: 16px; }
+    .win-card { height: 320px; }
 
     .hero-stats { gap: 32px; margin-top: 50px; }
     .hero-stat-num { font-size: 2rem; }
@@ -1768,7 +1949,7 @@
       <span data-i18n="hero_title_line3">— utan förskott</span>
     </h1>
     <p class="hero-sub reveal reveal-delay-2" data-i18n="hero_sub">
-      Vi förbereder din tomt och ditt hus inför försäljningen. Du höjer bara annonspriset — vi får betalt först när huset är sålt. Inga risker, inga utgifter i förväg.
+      Vi gör huset och tomten redo inför försäljning — fasad, trädgård, småfix och städning. Köparen ser ett välskött hem, inte en lista med problem. Du betalar först efter försäljningen.
     </p>
     <div class="hero-buttons reveal reveal-delay-3">
       <a href="#contact" class="btn btn-primary">
@@ -1779,6 +1960,17 @@
     </div>
   </div>
 </header>
+
+<!-- ===== Intro: When a house is worth more than it looks ===== -->
+<section id="intro-worth">
+  <div class="container">
+    <div class="intro-block reveal">
+      <div class="section-eyebrow" data-i18n="worth_eyebrow">Bondar</div>
+      <h2 data-i18n="worth_title">När huset är värt mer än det ser ut</h2>
+      <p data-i18n="worth_text">Många hus förlorar köparens intresse redan på bilderna — inte för att huset är dåligt, utan för att tomten är ovårdad, fasaden ser trött ut, gräset är ojämnt, det finns småfix eller känns ostädat inuti. Köparen ser inte potentialen. Köparen ser arbete, tid och extra kostnader. Bondar tar bort dessa hinder innan bostaden fotograferas för annonsen.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ===== How it works ===== -->
 <section id="how">
@@ -1813,6 +2005,26 @@
   </div>
 </section>
 
+<!-- ===== Clear contract block ===== -->
+<section id="contract" style="padding-top:30px; padding-bottom:30px;">
+  <div class="container">
+    <div class="calm-block reveal">
+      <div class="calm-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="17" x2="13" y2="17"/>
+        </svg>
+      </div>
+      <div>
+        <h3 data-i18n="contract_title">Tydligt avtal innan vi börjar</h3>
+        <p data-i18n="contract_text">Innan arbetet startar skriver vi ett avtal där det tydligt anges: vad vi exakt gör, vilket ursprungligt pris ni räknar med, vilket nytt annonspris som föreslås, hur vår ersättning beräknas, vad som händer om huset säljs för ett annat pris, och när betalningen sker.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Example ===== -->
 <section style="padding-top:30px;">
   <div class="example container">
@@ -1823,18 +2035,105 @@
       <div class="example-grid">
         <div class="example-card reveal reveal-delay-1">
           <div class="example-card-label" data-i18n="ex_1_label">Ursprungligt pris</div>
-          <div class="example-card-value">1 000 000 kr</div>
-          <div class="example-card-desc" data-i18n="ex_1_desc">Det pris du själv hade satt på huset utan förberedelser.</div>
+          <div class="example-card-value">4 000 000 kr</div>
+          <div class="example-card-desc" data-i18n="ex_1_desc">Det pris du räknade med.</div>
         </div>
         <div class="example-card reveal reveal-delay-2">
           <div class="example-card-label" data-i18n="ex_2_label">Nytt annonspris</div>
-          <div class="example-card-value">1 080 000 kr</div>
-          <div class="example-card-desc" data-i18n="ex_2_desc">Vi förbereder huset och tomten — du höjer priset i annonsen.</div>
+          <div class="example-card-value">4 180 000 kr</div>
+          <div class="example-card-desc" data-i18n="ex_2_desc">Vi förbereder huset — du höjer annonspriset med en överenskommen summa.</div>
         </div>
         <div class="example-card reveal reveal-delay-3">
           <div class="example-card-label" data-i18n="ex_3_label">Ditt resultat</div>
-          <div class="example-card-value" data-i18n="ex_3_value">Du får 1 000 000 kr</div>
-          <div class="example-card-desc" data-i18n="ex_3_desc">Skillnaden på 80 000 kr går till oss — endast efter genomförd försäljning.</div>
+          <div class="example-card-value" data-i18n="ex_3_value">4 000 000 kr</div>
+          <div class="example-card-desc" data-i18n="ex_3_desc">Du får hela det belopp du räknat med. Skillnaden på 180 000 kr går till Bondar — men först efter genomförd försäljning.</div>
+        </div>
+      </div>
+      <p class="example-note reveal reveal-delay-4" data-i18n="ex_note">Exakt belopp bestäms alltid individuellt för varje objekt och fastställs i avtal innan arbetet startar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Everyone wins (flip cards) ===== -->
+<section id="win">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow" data-i18n="win_eyebrow">Bondar</div>
+      <h2 data-i18n="win_title">Alla vinner</h2>
+      <p data-i18n="win_sub">Vår modell är byggd så att alla tjänar på det — säljaren, köparen och mäklaren.</p>
+    </div>
+    <div class="win-grid">
+      <div class="win-card reveal reveal-delay-1" role="button" tabindex="0" aria-label="Seller card">
+        <div class="win-card-inner">
+          <div class="win-face win-front">
+            <div class="win-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M3 10l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V10z"/>
+                <polyline points="9 21 9 13 15 13 15 21"/>
+              </svg>
+            </div>
+            <h3 data-i18n="win_seller_title">Säljaren</h3>
+            <span class="win-hint" data-i18n="win_hint">Klicka för att se</span>
+          </div>
+          <div class="win-face win-back">
+            <h4 data-i18n="win_seller_h">Vad säljaren får</h4>
+            <ul>
+              <li data-i18n="win_seller_l1"></li>
+              <li data-i18n="win_seller_l2"></li>
+              <li data-i18n="win_seller_l3"></li>
+              <li data-i18n="win_seller_l4"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="win-card reveal reveal-delay-2" role="button" tabindex="0" aria-label="Buyer card">
+        <div class="win-card-inner">
+          <div class="win-face win-front">
+            <div class="win-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="8" cy="15" r="4"/>
+                <path d="M10.85 12.15L19 4"/>
+                <path d="M18 5l3 3"/>
+                <path d="M15 8l3 3"/>
+              </svg>
+            </div>
+            <h3 data-i18n="win_buyer_title">Köparen</h3>
+            <span class="win-hint" data-i18n="win_hint">Klicka för att se</span>
+          </div>
+          <div class="win-face win-back">
+            <h4 data-i18n="win_buyer_h">Vad köparen får</h4>
+            <ul>
+              <li data-i18n="win_buyer_l1"></li>
+              <li data-i18n="win_buyer_l2"></li>
+              <li data-i18n="win_buyer_l3"></li>
+              <li data-i18n="win_buyer_l4"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="win-card reveal reveal-delay-3" role="button" tabindex="0" aria-label="Realtor card">
+        <div class="win-card-inner">
+          <div class="win-face win-front">
+            <div class="win-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M17 20h5v-2a4 4 0 00-3-3.87"/>
+                <path d="M9 20H4v-2a4 4 0 013-3.87"/>
+                <path d="M13 11a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <path d="M19 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <h3 data-i18n="win_realtor_title">Mäklare</h3>
+            <span class="win-hint" data-i18n="win_hint">Klicka för att se</span>
+          </div>
+          <div class="win-face win-back">
+            <h4 data-i18n="win_realtor_h">Vad mäklaren får</h4>
+            <ul>
+              <li data-i18n="win_realtor_l1"></li>
+              <li data-i18n="win_realtor_l2"></li>
+              <li data-i18n="win_realtor_l3"></li>
+              <li data-i18n="win_realtor_l4"></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -1935,8 +2234,8 @@
           </svg>
         </div>
         <div>
-          <h3 data-i18n="why_1_title">Noll risk för dig</h3>
-          <p data-i18n="why_1_desc">Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. All ekonomisk risk ligger hos oss, inte hos dig.</p>
+          <h3 data-i18n="why_1_title">Ingen förskottsbetalning</h3>
+          <p data-i18n="why_1_desc">Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. Allt ekonomiskt åtagande ligger hos oss, inte hos dig.</p>
         </div>
       </div>
       <div class="why-card reveal reveal-delay-2">
@@ -1976,6 +2275,16 @@
   </div>
 </section>
 
+<!-- ===== Honest: What we don't promise ===== -->
+<section id="honest" style="padding-top:30px;">
+  <div class="container">
+    <div class="honest-block reveal">
+      <h2 data-i18n="honest_title">Vad vi inte lovar</h2>
+      <p data-i18n="honest_text">Vi lovar inte ett magiskt högre slutpris. Vi lovar inte att marknaden betalar mer bara för att priset höjs. Vi gör inte dolda fel osynliga. Vi ersätter inte mäklarens värdering. Det vi gör är konkret: vi förbättrar husets skick, presentation och första intryck inför fotografering och visning.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FAQ ===== -->
 <section id="faq">
   <div class="container">
@@ -2005,11 +2314,11 @@
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">
-          <span data-i18n="faq_3_q">Hur mycket ska jag höja priset i annonsen?</span>
+          <span data-i18n="faq_3_q">Hur mycket brukar prisökningen vara?</span>
           <span class="faq-icon"></span>
         </button>
         <div class="faq-a"><div class="faq-a-inner" data-i18n="faq_3_a">
-          Det bestämmer vi tillsammans efter vår bedömning av huset. Beloppet beror på hur mycket arbete som behövs och vilken effekt vi tror det får på marknadsvärdet. Vanligtvis rör det sig om 5–10% av husets pris, men ibland mer eller mindre. Du har alltid sista ordet.
+          Det finns ingen fast procentsats. I vissa fall kan det handla om 50 000 kr, i andra fall mer. Det beror på husets skick, området, marknaden och vad som faktiskt behöver göras. Vi föreslår aldrig en höjning utan att först bedöma objektet.
         </div></div>
       </div>
       <div class="faq-item reveal">
@@ -2056,6 +2365,27 @@
         <div class="faq-a"><div class="faq-a-inner" data-i18n="faq_8_a">
           Vår erfarenhet är att ett välskött hus säljs för det högre priset eftersom köparen ser värdet direkt. Skulle du sälja för lägre än det nya annonspriset räknar vi om vår ersättning utifrån det faktiska försäljningspriset — du får alltid behålla minst det belopp som motsvarade din ursprungliga prislapp.
         </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span data-i18n="faq_9_q">Vad står i avtalet?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n="faq_9_a"></div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span data-i18n="faq_10_q">Kan ni samarbeta med min mäklare?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n="faq_10_a"></div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span data-i18n="faq_11_q">När är bäst tid att kontakta er?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner" data-i18n="faq_11_a"></div></div>
       </div>
     </div>
   </div>
@@ -2273,11 +2603,11 @@ const translations = {
     hero_title_line1: "Sälj ditt hus",
     hero_title_line2: "snabbare och dyrare",
     hero_title_line3: "— utan förskott",
-    hero_sub: "Vi förbereder din tomt och ditt hus inför försäljningen. Du höjer bara annonspriset — vi får betalt först när huset är sålt. Inga risker, inga utgifter i förväg.",
+    hero_sub: "Vi gör huset och tomten redo inför försäljning — fasad, trädgård, småfix och städning. Köparen ser ett välskött hem, inte en lista med problem. Du betalar först efter försäljningen.",
     hero_btn_1: "Få en kostnadsfri bedömning",
     hero_btn_2: "Hur det fungerar",
     stat_1: "Förskott från dig",
-    stat_2: "Genomsnittlig prisökning",
+    stat_2: "Individuell bedömning",
     stat_3: "Team av yrkesfolk",
 
     how_eyebrow: "Processen",
@@ -2296,12 +2626,13 @@ const translations = {
     ex_title: "Så här ser ekonomin ut",
     ex_sub: "Ett verkligt exempel på hur samarbetet fungerar — du riskerar ingenting, men tjänar mer.",
     ex_1_label: "Ursprungligt pris",
-    ex_1_desc: "Det pris du själv hade satt på huset utan förberedelser.",
+    ex_1_desc: "Det pris du räknade med.",
     ex_2_label: "Nytt annonspris",
-    ex_2_desc: "Vi förbereder huset och tomten — du höjer priset i annonsen.",
+    ex_2_desc: "Vi förbereder huset — du höjer annonspriset med en överenskommen summa.",
     ex_3_label: "Ditt resultat",
-    ex_3_value: "Du får 1 000 000 kr",
-    ex_3_desc: "Skillnaden på 80 000 kr går till oss — endast efter genomförd försäljning.",
+    ex_3_value: "4 000 000 kr",
+    ex_3_desc: "Du får hela det belopp du räknat med. Skillnaden på 180 000 kr går till Bondar — men först efter genomförd försäljning.",
+    ex_note: "Exakt belopp bestäms alltid individuellt för varje objekt och fastställs i avtal innan arbetet startar.",
 
     serv_eyebrow: "Våra tjänster",
     serv_title: "Vad vi gör för ditt hus",
@@ -2345,8 +2676,8 @@ const translations = {
     why_eyebrow: "Varför Bondar",
     why_title: "Du tjänar mer — utan att riskera något",
     why_sub: "Vi jobbar på ett annorlunda sätt. Här är varför våra kunder rekommenderar oss vidare.",
-    why_1_title: "Noll risk för dig",
-    why_1_desc: "Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. All ekonomisk risk ligger hos oss, inte hos dig.",
+    why_1_title: "Ingen förskottsbetalning",
+    why_1_desc: "Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. Allt ekonomiskt åtagande ligger hos oss, inte hos dig.",
     why_2_title: "Professionellt team",
     why_2_desc: "Vi är ett litet team av specialister som kan sitt jobb. Vi gör allt själva — inga underleverantörer, inga överraskningar. Varje projekt har en ansvarig kontaktperson.",
     why_3_title: "Erfarenhet av husförsäljning",
@@ -2361,8 +2692,8 @@ const translations = {
     faq_1_a: "Stämmer. Du betalar inget när vi börjar arbetet, inget när vi avslutar det och inget under tiden huset är till salu. Vi får vår ersättning först när köpet är genomfört och pengarna har kommit in på ditt konto. Allt regleras i ett enkelt avtal som vi skriver tillsammans innan arbetet startar.",
     faq_2_q: "Vad händer om huset inte säljs?",
     faq_2_a: "Säljs inte huset — får vi inget betalt. Det är hela poängen med vår modell: risken ligger hos oss, inte hos dig. Vi har därför ett starkt eget intresse av att göra arbetet så bra att huset säljs snabbt och till det nya, högre priset.",
-    faq_3_q: "Hur mycket ska jag höja priset i annonsen?",
-    faq_3_a: "Det bestämmer vi tillsammans efter vår bedömning av huset. Beloppet beror på hur mycket arbete som behövs och vilken effekt vi tror det får på marknadsvärdet. Vanligtvis rör det sig om 5–10% av husets pris, men ibland mer eller mindre. Du har alltid sista ordet.",
+    faq_3_q: "Hur mycket brukar prisökningen vara?",
+    faq_3_a: "Det finns ingen fast procentsats. I vissa fall kan det handla om 50 000 kr, i andra fall mer. Det beror på husets skick, området, marknaden och vad som faktiskt behöver göras. Vi föreslår aldrig en höjning utan att först bedöma objektet.",
     faq_4_q: "Vilka områden i Sverige täcker ni?",
     faq_4_a: "Vi arbetar främst med privatvillor i vårt närområde, men är öppna för uppdrag i hela mellersta Sverige. Hör av dig så berättar vi om vi kan ta oss an just ditt projekt — vi reser gärna lite längre när det är värt det.",
     faq_5_q: "Hur lång tid tar arbetet?",
@@ -2373,6 +2704,45 @@ const translations = {
     faq_7_a: "Ja, alltid. Innan vi börjar något arbete tecknar vi ett enkelt skriftligt avtal som beskriver vad som ska göras, hur prishöjningen ska se ut och hur betalningen sker efter försäljningen. Det skyddar både dig och oss.",
     faq_8_q: "Vad händer om köparen tycker priset är för högt?",
     faq_8_a: "Vår erfarenhet är att ett välskött hus säljs för det högre priset eftersom köparen ser värdet direkt. Skulle du sälja för lägre än det nya annonspriset räknar vi om vår ersättning utifrån det faktiska försäljningspriset — du får alltid behålla minst det belopp som motsvarade din ursprungliga prislapp.",
+    faq_9_q: "Vad står i avtalet?",
+    faq_9_a: "I avtalet står tydligt: arbetsomfattning, ursprungspris, nytt annonspris, vår ersättning och betalningsvillkor. Inga dolda punkter.",
+    faq_10_q: "Kan ni samarbeta med min mäklare?",
+    faq_10_a: "Ja, vi samarbetar gärna med mäklare. Mäklaren känner marknaden, vi ser vad som kan förbättras visuellt inför foto och visning. Det fungerar bäst när vi stämmer av åtgärderna tillsammans.",
+    faq_11_q: "När är bäst tid att kontakta er?",
+    faq_11_a: "Bäst resultat får vi när du kontaktar oss INNAN mäklarfotografen kommer. Förberedelser inför fotograferingen ger störst effekt.",
+
+    worth_eyebrow: "Bondar",
+    worth_title: "När huset är värt mer än det ser ut",
+    worth_text: "Många hus förlorar köparens intresse redan på bilderna — inte för att huset är dåligt, utan för att tomten är ovårdad, fasaden ser trött ut, gräset är ojämnt, det finns småfix eller känns ostädat inuti. Köparen ser inte potentialen. Köparen ser arbete, tid och extra kostnader. Bondar tar bort dessa hinder innan bostaden fotograferas för annonsen.",
+
+    contract_title: "Tydligt avtal innan vi börjar",
+    contract_text: "Innan arbetet startar skriver vi ett avtal där det tydligt anges: vad vi exakt gör, vilket ursprungligt pris ni räknar med, vilket nytt annonspris som föreslås, hur vår ersättning beräknas, vad som händer om huset säljs för ett annat pris, och när betalningen sker.",
+
+    win_eyebrow: "Bondar",
+    win_title: "Alla vinner",
+    win_sub: "Vår modell är byggd så att alla tjänar på det — säljaren, köparen och mäklaren.",
+    win_hint: "Klicka för att se",
+    win_seller_title: "Säljaren",
+    win_seller_h: "Vad säljaren får",
+    win_seller_l1: "Får sitt ursprungliga pris utan att betala något i förväg",
+    win_seller_l2: "Huset säljs snabbare och mer attraktivt",
+    win_seller_l3: "Slipper lägga tid och energi på förberedelser",
+    win_seller_l4: "Bondar betalas — först efter försäljning",
+    win_buyer_title: "Köparen",
+    win_buyer_h: "Vad köparen får",
+    win_buyer_l1: "Köper ett hem redo att flytta in i",
+    win_buyer_l2: "Inga extra kostnader efter köpet",
+    win_buyer_l3: "Slipper veckor av trädgårdsarbete",
+    win_buyer_l4: "Flytta in och njut av ditt nya hem",
+    win_realtor_title: "Mäklare",
+    win_realtor_h: "Vad mäklaren får",
+    win_realtor_l1: "Objektet är lättare att visa och fotografera",
+    win_realtor_l2: "Bättre första intryck i annonsen",
+    win_realtor_l3: "Mindre prutning från köparen",
+    win_realtor_l4: "Snabbare avslut",
+
+    honest_title: "Vad vi inte lovar",
+    honest_text: "Vi lovar inte ett magiskt högre slutpris. Vi lovar inte att marknaden betalar mer bara för att priset höjs. Vi gör inte dolda fel osynliga. Vi ersätter inte mäklarens värdering. Det vi gör är konkret: vi förbättrar husets skick, presentation och första intryck inför fotografering och visning.",
 
     contact_eyebrow: "Kontakta oss",
     contact_title: "Redo att sälja smartare?",
@@ -2427,11 +2797,11 @@ const translations = {
     hero_title_line1: "Sell your house",
     hero_title_line2: "faster and for more",
     hero_title_line3: "— without paying upfront",
-    hero_sub: "We prepare your property and house for sale. You simply raise the listing price — we get paid only after the house is sold. No risk, no upfront costs.",
+    hero_sub: "We prepare your property and house for sale — facade, yard, minor fixes, cleanliness. Buyers see a well-kept home, not a list of problems. You pay only after the house is sold.",
     hero_btn_1: "Get a free assessment",
     hero_btn_2: "How it works",
     stat_1: "Upfront payment",
-    stat_2: "Average price increase",
+    stat_2: "Individual assessment",
     stat_3: "Team of professionals",
 
     how_eyebrow: "The process",
@@ -2450,12 +2820,13 @@ const translations = {
     ex_title: "Here's how the math works",
     ex_sub: "A real example of how our partnership works — you risk nothing, but earn more.",
     ex_1_label: "Original price",
-    ex_1_desc: "The price you would have set yourself without any preparation.",
+    ex_1_desc: "The price you expected to receive.",
     ex_2_label: "New listing price",
-    ex_2_desc: "We prepare the house and property — you raise the price in the listing.",
+    ex_2_desc: "We prepare the home — you raise the listing price by an agreed amount.",
     ex_3_label: "Your result",
-    ex_3_value: "You get 1,000,000 kr",
-    ex_3_desc: "The 80,000 kr difference goes to us — only after a successful sale.",
+    ex_3_value: "4,000,000 kr",
+    ex_3_desc: "You receive the full amount you planned. The 180,000 kr difference goes to Bondar — but only after a successful sale.",
+    ex_note: "The exact amount is always discussed individually for each property and fixed in a contract before work begins.",
 
     serv_eyebrow: "Our services",
     serv_title: "What we do for your house",
@@ -2499,8 +2870,8 @@ const translations = {
     why_eyebrow: "Why Bondar",
     why_title: "Earn more — without taking any risk",
     why_sub: "We work differently. Here's why our clients keep recommending us.",
-    why_1_title: "Zero risk for you",
-    why_1_desc: "You never pay us upfront. If the house doesn't sell — we don't get paid either. All financial risk sits with us, not with you.",
+    why_1_title: "No upfront payment",
+    why_1_desc: "You never pay us upfront. If the house doesn't sell — we don't get paid either. The financial commitment sits with us, not with you.",
     why_2_title: "Professional team",
     why_2_desc: "We're a small team of specialists who know our craft. We handle every job ourselves — no subcontractors, no surprises. Every project has one dedicated point of contact.",
     why_3_title: "Experience in selling houses",
@@ -2515,8 +2886,8 @@ const translations = {
     faq_1_a: "Correct. You pay nothing when we start the work, nothing when we finish, and nothing while the house is on the market. We're paid only after the sale is closed and the money has reached your account. Everything is set out in a simple agreement we sign together before work begins.",
     faq_2_q: "What happens if the house doesn't sell?",
     faq_2_a: "If the house doesn't sell — we don't get paid. That's the whole point of our model: the risk is on us, not on you. That gives us a strong personal interest in doing the work well so the house sells quickly at the new, higher price.",
-    faq_3_q: "How much should I raise the listing price by?",
-    faq_3_a: "We decide together after our assessment. The amount depends on how much work is needed and how much we believe it will affect market value. Typically it's 5–10% of the house price, sometimes more, sometimes less. You always have the final say.",
+    faq_3_q: "How much is the typical price increase?",
+    faq_3_a: "There's no fixed percentage. In some cases it can be 50 000 kr, in others more. It depends on the condition of the house, the area, the market, and what actually needs to be done. We never propose a price increase without first evaluating the property.",
     faq_4_q: "Which areas in Sweden do you cover?",
     faq_4_a: "We mainly work with private homes in our local area but are open to projects across central Sweden. Get in touch and we'll let you know if we can take on your project — we're happy to travel a bit further when it's worth it.",
     faq_5_q: "How long does the work take?",
@@ -2527,6 +2898,45 @@ const translations = {
     faq_7_a: "Yes, always. Before we start any work, we sign a simple written agreement describing what will be done, how the price increase will work, and how payment is settled after the sale. It protects both you and us.",
     faq_8_q: "What if the buyer thinks the price is too high?",
     faq_8_a: "Our experience is that a well-prepared home sells at the higher price because buyers see the value immediately. If you sell for less than the new listing price, we recalculate our fee based on the actual sale price — you always keep at least the amount equal to your original price.",
+    faq_9_q: "What's in the contract?",
+    faq_9_a: "The contract clearly states: scope of work, original price, new listing price, our fee, and payment terms. No hidden clauses.",
+    faq_10_q: "Can you work with my realtor?",
+    faq_10_a: "Yes, we gladly cooperate with realtors. The realtor knows the market, we see what can be improved visually before photos and viewings. It works best when we coordinate together.",
+    faq_11_q: "When is the best time to contact you?",
+    faq_11_a: "The best results come when you contact us BEFORE the realtor takes photos for the listing. Preparing the home before photography gives maximum effect.",
+
+    worth_eyebrow: "Bondar",
+    worth_title: "When a house is worth more than it looks",
+    worth_text: "Many homes lose buyer interest already in the photos — not because the house is bad, but because the yard is unkempt, the facade looks tired, the lawn is uneven, there are minor defects or the inside feels cluttered. The buyer doesn't see the potential. The buyer sees work, time, and extra costs. Bondar removes these obstacles before the home is photographed for the listing.",
+
+    contract_title: "Clear contract before we start",
+    contract_text: "Before work starts, we sign a contract clearly stating: what exactly we do, the original price, the new listing price, how our fee is calculated, what happens if the house sells at a different price, and when payment occurs.",
+
+    win_eyebrow: "Bondar",
+    win_title: "Everyone wins",
+    win_sub: "Our model is built so that everyone benefits — the seller, the buyer, and the realtor.",
+    win_hint: "Click to learn",
+    win_seller_title: "Seller",
+    win_seller_h: "What the seller gets",
+    win_seller_l1: "Receives the original amount without spending a single krona",
+    win_seller_l2: "House sells faster and more attractively",
+    win_seller_l3: "Saves time and effort on preparation",
+    win_seller_l4: "Bondar payment — only after sale",
+    win_buyer_title: "Buyer",
+    win_buyer_h: "What the buyer gets",
+    win_buyer_l1: "Buys a home ready to live in",
+    win_buyer_l2: "No extra costs after purchase",
+    win_buyer_l3: "No weeks spent fixing the yard",
+    win_buyer_l4: "Move in and enjoy your new home",
+    win_realtor_title: "Realtor",
+    win_realtor_h: "What the realtor gets",
+    win_realtor_l1: "Property is easier to show and photograph",
+    win_realtor_l2: "Better first impression in the listing",
+    win_realtor_l3: "Less haggling from buyers",
+    win_realtor_l4: "Faster closing",
+
+    honest_title: "What we don't promise",
+    honest_text: "We don't promise magically higher selling prices. We don't promise the market will pay more just because the listing price is higher. We don't hide serious defects. We don't replace a realtor's valuation. We do something concrete: we improve the condition, presentation, and first impression of the home before photography and showings.",
 
     contact_eyebrow: "Get in touch",
     contact_title: "Ready to sell smarter?",
@@ -2581,11 +2991,11 @@ const translations = {
     hero_title_line1: "Продайте свой дом",
     hero_title_line2: "быстрее и дороже",
     hero_title_line3: "— без предоплаты",
-    hero_sub: "Мы приводим в порядок участок и сам дом перед продажей. Вы просто поднимаете цену в объявлении — мы получаем оплату только после того, как дом продан. Никаких рисков и никаких затрат заранее.",
+    hero_sub: "Мы приводим участок и дом в порядок перед продажей — фасад, двор, мелкие дефекты, чистоту. Покупатель видит ухоженный дом, а не список проблем. Оплата только после успешной продажи.",
     hero_btn_1: "Получить бесплатную оценку",
     hero_btn_2: "Как это работает",
     stat_1: "Предоплата от вас",
-    stat_2: "Средний прирост цены",
+    stat_2: "Индивидуальная оценка",
     stat_3: "Команда профессионалов",
 
     how_eyebrow: "Процесс",
@@ -2604,12 +3014,13 @@ const translations = {
     ex_title: "Как это выглядит в цифрах",
     ex_sub: "Реальный пример того, как работает наше сотрудничество — вы ничем не рискуете, но зарабатываете больше.",
     ex_1_label: "Изначальная цена",
-    ex_1_desc: "Цена, которую вы поставили бы сами без всякой подготовки.",
+    ex_1_desc: "Цена, на которую вы рассчитывали при продаже.",
     ex_2_label: "Новая цена в объявлении",
-    ex_2_desc: "Мы готовим дом и участок — вы поднимаете цену в объявлении.",
+    ex_2_desc: "Мы готовим дом — вы поднимаете цену в объявлении на согласованную сумму.",
     ex_3_label: "Ваш результат",
-    ex_3_value: "Вы получаете 1 000 000 крон",
-    ex_3_desc: "Разница в 80 000 крон достаётся нам — только после успешной продажи.",
+    ex_3_value: "4 000 000 kr",
+    ex_3_desc: "Вы получаете полную сумму, которую планировали. Разница в 180 000 крон достаётся Bondar — но только после успешной продажи.",
+    ex_note: "Точная сумма всегда обсуждается индивидуально под каждый объект и фиксируется в договоре до начала работ.",
 
     serv_eyebrow: "Наши услуги",
     serv_title: "Что мы делаем для вашего дома",
@@ -2653,8 +3064,8 @@ const translations = {
     why_eyebrow: "Почему Bondar",
     why_title: "Вы зарабатываете больше — без всякого риска",
     why_sub: "Мы работаем по-другому. Вот почему наши клиенты рекомендуют нас друзьям.",
-    why_1_title: "Нулевой риск для вас",
-    why_1_desc: "Вы никогда не платите нам заранее. Если дом не продан — мы тоже ничего не получаем. Весь финансовый риск на нас, а не на вас.",
+    why_1_title: "Без предоплаты",
+    why_1_desc: "Вы никогда не платите нам заранее. Если дом не продан — мы тоже ничего не получаем. Все финансовые обязательства на нашей стороне, а не на вашей.",
     why_2_title: "Профессиональная команда",
     why_2_desc: "Мы небольшая команда специалистов, которая знает свою работу. Всё делаем сами — без субподрядчиков и сюрпризов. Каждый проект ведёт один ответственный человек.",
     why_3_title: "Опыт продажи домов",
@@ -2669,8 +3080,8 @@ const translations = {
     faq_1_a: "Именно так. Вы ничего не платите ни в начале работы, ни в конце, ни пока дом продаётся. Мы получаем оплату только после того, как сделка закрыта и деньги поступили на ваш счёт. Всё это закрепляется в простом письменном договоре, который мы подписываем перед началом работ.",
     faq_2_q: "Что будет, если дом не продастся?",
     faq_2_a: "Если дом не продаётся — мы не получаем ничего. В этом и весь смысл нашей модели: риск лежит на нас, а не на вас. Поэтому у нас есть прямая личная заинтересованность сделать работу так, чтобы дом продался быстро и по новой, более высокой цене.",
-    faq_3_q: "На сколько поднимать цену в объявлении?",
-    faq_3_a: "Это решаем вместе после нашей оценки дома. Сумма зависит от объёма необходимых работ и того, как они повлияют на рыночную стоимость. Обычно это 5–10% от цены дома, иногда больше, иногда меньше. Последнее слово всегда за вами.",
+    faq_3_q: "Сколько обычно прирост цены?",
+    faq_3_a: "Точной фиксированной процентной ставки нет. В одних случаях это может быть 50 000 крон, в других больше. Всё зависит от состояния дома, района, рынка и того, что нужно сделать. Мы никогда не предлагаем повышение цены без предварительной оценки объекта.",
     faq_4_q: "В каких регионах Швеции вы работаете?",
     faq_4_a: "В основном мы работаем с частными домами в нашем районе, но открыты к проектам по всей центральной Швеции. Свяжитесь с нами — расскажем, сможем ли взяться именно за ваш проект. Иногда мы готовы поехать и подальше, если это того стоит.",
     faq_5_q: "Сколько времени занимает работа?",
@@ -2681,6 +3092,45 @@ const translations = {
     faq_7_a: "Да, всегда. Перед началом любой работы мы подписываем простой письменный договор, в котором указано, что будет сделано, как именно поднимается цена и как происходит оплата после продажи. Это защищает и вас, и нас.",
     faq_8_q: "А если покупатель посчитает цену слишком высокой?",
     faq_8_a: "Наш опыт показывает: ухоженный дом продаётся по новой цене, потому что покупатель сразу видит, за что платит. Если же дом продастся дешевле новой цены, мы пересчитываем своё вознаграждение исходя из фактической суммы продажи — вы в любом случае получаете не меньше изначально запланированной суммы.",
+    faq_9_q: "Что фиксируется в договоре?",
+    faq_9_a: "В договоре чётко указаны: список работ, исходная цена, новая цена в объявлении, размер нашего вознаграждения и условия оплаты. Никаких скрытых пунктов.",
+    faq_10_q: "Можно ли работать с моим риелтором?",
+    faq_10_a: "Да, мы охотно сотрудничаем с риелторами. Риелтор знает рынок, мы видим что можно улучшить визуально перед фото и показом. Это работает лучше всего, когда мы согласовываем работы вместе.",
+    faq_11_q: "Когда лучше всего обращаться?",
+    faq_11_a: "Лучший результат получается, когда вы обращаетесь к нам ДО того, как риелтор сделает фото для объявления. Подготовка дома до фотосъёмки даёт максимальный эффект.",
+
+    worth_eyebrow: "Bondar",
+    worth_title: "Когда дом стоит больше, чем выглядит",
+    worth_text: "Многие дома теряют интерес покупателя уже на фотографиях — не потому что дом плохой, а потому что участок неухоженный, фасад выглядит уставшим, газон неровный, есть мелкие дефекты или внутри ощущение беспорядка. Покупатель не видит потенциал. Покупатель видит работу, время и дополнительные расходы. Bondar убирает эти препятствия до того, как дом сфотографируют для объявления.",
+
+    contract_title: "Прозрачный договор перед началом",
+    contract_text: "До начала работ мы подписываем договор, где чётко указано: что именно мы делаем, какая исходная цена, какая новая цена в объявлении, как рассчитывается наше вознаграждение, что произойдёт если дом продастся за другую цену, и когда происходит оплата.",
+
+    win_eyebrow: "Bondar",
+    win_title: "Выигрывают все стороны",
+    win_sub: "Наша модель устроена так, что в плюсе остаётся каждый — продавец, покупатель и риелтор.",
+    win_hint: "Нажмите чтобы узнать",
+    win_seller_title: "Продавец",
+    win_seller_h: "Что получает продавец",
+    win_seller_l1: "Получает свою исходную сумму без единой кроны вложений",
+    win_seller_l2: "Дом продаётся быстрее и привлекательнее",
+    win_seller_l3: "Не тратит время и силы на подготовку",
+    win_seller_l4: "Оплата Bondar — только после продажи",
+    win_buyer_title: "Покупатель",
+    win_buyer_h: "Что получает покупатель",
+    win_buyer_l1: "Покупает дом, готовый к жизни",
+    win_buyer_l2: "Никаких лишних расходов после покупки",
+    win_buyer_l3: "Не нужно тратить недели на ремонт двора",
+    win_buyer_l4: "Заезжай и наслаждайся новым домом",
+    win_realtor_title: "Риелтор",
+    win_realtor_h: "Что получает риелтор",
+    win_realtor_l1: "Объект легче показывать и фотографировать",
+    win_realtor_l2: "Лучшее первое впечатление в объявлении",
+    win_realtor_l3: "Меньше торга со стороны покупателя",
+    win_realtor_l4: "Сделка проходит быстрее",
+
+    honest_title: "Что мы не обещаем",
+    honest_text: "Мы не обещаем магически высокую цену продажи. Мы не обещаем, что рынок заплатит больше только потому, что цена в объявлении выше. Мы не скрываем серьёзные дефекты. Мы не заменяем оценку риелтора. Мы делаем конкретное: улучшаем состояние, презентацию и первое впечатление дома перед фотосъёмкой и показом.",
 
     contact_eyebrow: "Связаться с нами",
     contact_title: "Готовы продать дом умнее?",
@@ -2881,6 +3331,27 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== Win flip cards =====
+document.querySelectorAll('.win-card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.classList.toggle('flipped');
+    }
+  });
+});
+const winSection = document.getElementById('win');
+if (winSection) {
+  new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        winSection.querySelectorAll('.win-card.flipped').forEach(c => c.classList.remove('flipped'));
+      }
+    });
+  }, { threshold: 0 }).observe(winSection);
+}
 
 // ===== Service modals =====
 function openModal(id) {

@@ -894,7 +894,21 @@
     display: flex;
     gap: 22px;
     align-items: flex-start;
-    transition: background-color 0.5s ease, border-color 0.5s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.5s ease;
+  }
+  .calm-block:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(59, 107, 78, 0.12);
+    border-color: var(--accent);
+  }
+  .calm-block:hover .calm-icon {
+    transform: scale(1.08);
+    background: var(--accent);
+    color: #fff;
+  }
+  .calm-block:hover h3 {
+    color: var(--accent);
   }
   .calm-icon {
     flex-shrink: 0;
@@ -905,11 +919,13 @@
     align-items: center;
     justify-content: center;
     color: var(--accent);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   }
   .calm-icon svg { width: 26px; height: 26px; }
   .calm-block h3 {
     font-size: 1.25rem;
     margin-bottom: 10px;
+    transition: color 0.3s ease;
   }
   .calm-block p {
     color: var(--text-soft);
@@ -2031,7 +2047,7 @@
     <div class="example-inner">
       <div class="section-eyebrow reveal" data-i18n="ex_eyebrow">Räkneexempel</div>
       <h2 class="reveal reveal-delay-1" data-i18n="ex_title">Så här ser ekonomin ut</h2>
-      <p class="reveal reveal-delay-2" data-i18n="ex_sub">Ett verkligt exempel på hur samarbetet fungerar — du riskerar ingenting, men tjänar mer.</p>
+      <p class="reveal reveal-delay-2" data-i18n="ex_sub">Ett verkligt exempel — du får det belopp du räknat med, utan att betala något i förväg.</p>
       <div class="example-grid">
         <div class="example-card reveal reveal-delay-1">
           <div class="example-card-label" data-i18n="ex_1_label">Ursprungligt pris</div>
@@ -2223,7 +2239,7 @@
   <div class="why container" style="padding-top:90px; padding-bottom:90px;">
     <div class="section-head reveal">
       <div class="section-eyebrow" data-i18n="why_eyebrow">Varför Bondar</div>
-      <h2 data-i18n="why_title">Du tjänar mer — utan att riskera något</h2>
+      <h2 data-i18n="why_title">Du får ditt pris — utan förskott och utan risk</h2>
       <p data-i18n="why_sub">Vi jobbar på ett annorlunda sätt. Här är varför våra kunder rekommenderar oss vidare.</p>
     </div>
     <div class="why-grid">
@@ -2624,7 +2640,7 @@ const translations = {
 
     ex_eyebrow: "Räkneexempel",
     ex_title: "Så här ser ekonomin ut",
-    ex_sub: "Ett verkligt exempel på hur samarbetet fungerar — du riskerar ingenting, men tjänar mer.",
+    ex_sub: "Ett verkligt exempel — du får det belopp du räknat med, utan att betala något i förväg.",
     ex_1_label: "Ursprungligt pris",
     ex_1_desc: "Det pris du räknade med.",
     ex_2_label: "Nytt annonspris",
@@ -2674,7 +2690,7 @@ const translations = {
     serv_3_note: "Rekommenderas för hus som behöver en helhetsuppfräschning inför försäljning.",
 
     why_eyebrow: "Varför Bondar",
-    why_title: "Du tjänar mer — utan att riskera något",
+    why_title: "Du får ditt pris — utan förskott och utan risk",
     why_sub: "Vi jobbar på ett annorlunda sätt. Här är varför våra kunder rekommenderar oss vidare.",
     why_1_title: "Ingen förskottsbetalning",
     why_1_desc: "Du betalar oss aldrig i förväg. Säljs huset inte — får vi heller inget. Allt ekonomiskt åtagande ligger hos oss, inte hos dig.",
@@ -2818,7 +2834,7 @@ const translations = {
 
     ex_eyebrow: "Example calculation",
     ex_title: "Here's how the math works",
-    ex_sub: "A real example of how our partnership works — you risk nothing, but earn more.",
+    ex_sub: "A real example — you receive the amount you planned, with no upfront payment.",
     ex_1_label: "Original price",
     ex_1_desc: "The price you expected to receive.",
     ex_2_label: "New listing price",
@@ -2868,7 +2884,7 @@ const translations = {
     serv_3_note: "Recommended for houses that need a full refresh before selling.",
 
     why_eyebrow: "Why Bondar",
-    why_title: "Earn more — without taking any risk",
+    why_title: "You get your price — no upfront cost, no risk",
     why_sub: "We work differently. Here's why our clients keep recommending us.",
     why_1_title: "No upfront payment",
     why_1_desc: "You never pay us upfront. If the house doesn't sell — we don't get paid either. The financial commitment sits with us, not with you.",
@@ -3012,7 +3028,7 @@ const translations = {
 
     ex_eyebrow: "Пример расчёта",
     ex_title: "Как это выглядит в цифрах",
-    ex_sub: "Реальный пример того, как работает наше сотрудничество — вы ничем не рискуете, но зарабатываете больше.",
+    ex_sub: "Реальный пример — вы получаете ту сумму, на которую рассчитывали, без необходимости платить заранее.",
     ex_1_label: "Изначальная цена",
     ex_1_desc: "Цена, на которую вы рассчитывали при продаже.",
     ex_2_label: "Новая цена в объявлении",
@@ -3062,7 +3078,7 @@ const translations = {
     serv_3_note: "Рекомендуется для домов, которым нужно комплексное обновление перед продажей.",
 
     why_eyebrow: "Почему Bondar",
-    why_title: "Вы зарабатываете больше — без всякого риска",
+    why_title: "Вы получаете свою цену — без вложений и без риска",
     why_sub: "Мы работаем по-другому. Вот почему наши клиенты рекомендуют нас друзьям.",
     why_1_title: "Без предоплаты",
     why_1_desc: "Вы никогда не платите нам заранее. Если дом не продан — мы тоже ничего не получаем. Все финансовые обязательства на нашей стороне, а не на вашей.",
@@ -3398,11 +3414,15 @@ const TIME_CLASSES = ['time-morning', 'time-day', 'time-evening', 'time-night'];
 const SEASON_CLASSES = ['season-winter', 'season-spring', 'season-summer', 'season-autumn'];
 
 function detectTimeOfDay() {
+  // Local hour from the user's system clock (browser timezone, not UTC).
   const h = new Date().getHours();
-  if (h >= 6 && h < 10) return 'morning';
-  if (h >= 10 && h < 17) return 'day';
-  if (h >= 17 && h < 21) return 'evening';
-  return 'night';
+  let slot;
+  if (h >= 6  && h < 11) slot = 'morning';      // 06:00 — 10:59
+  else if (h >= 11 && h < 17) slot = 'day';     // 11:00 — 16:59
+  else if (h >= 17 && h < 22) slot = 'evening'; // 17:00 — 21:59
+  else slot = 'night';                           // 22:00 — 05:59
+  console.log('[Bondar theme] local hour =', h, '→', slot);
+  return slot;
 }
 
 function detectSeason() {

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bondar — Sälj ditt hus snabbare och dyrare</title>
 <meta name="description" content="Vi förbereder ditt hus inför försäljningen — utan förskott. Du betalar först när huset är sålt.">
-<link rel="icon" type="image/png" href="images/logo.png">
-<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="icon" type="image/png" href="images/bondar.png">
+<link rel="apple-touch-icon" href="images/bondar.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -3413,14 +3413,16 @@ document.addEventListener('keydown', e => {
 const TIME_CLASSES = ['time-morning', 'time-day', 'time-evening', 'time-night'];
 const SEASON_CLASSES = ['season-winter', 'season-spring', 'season-summer', 'season-autumn'];
 
+function computeTimeSlot(h) {
+  if (h >= 6  && h < 11) return 'morning';      // 06:00 — 10:59
+  if (h >= 11 && h < 17) return 'day';          // 11:00 — 16:59
+  if (h >= 17 && h < 22) return 'evening';      // 17:00 — 21:59
+  return 'night';                                // 22:00 — 05:59
+}
 function detectTimeOfDay() {
   // Local hour from the user's system clock (browser timezone, not UTC).
   const h = new Date().getHours();
-  let slot;
-  if (h >= 6  && h < 11) slot = 'morning';      // 06:00 — 10:59
-  else if (h >= 11 && h < 17) slot = 'day';     // 11:00 — 16:59
-  else if (h >= 17 && h < 22) slot = 'evening'; // 17:00 — 21:59
-  else slot = 'night';                           // 22:00 — 05:59
+  const slot = computeTimeSlot(h);
   console.log('[Bondar theme] local hour =', h, '→', slot);
   return slot;
 }
@@ -3435,40 +3437,67 @@ function detectSeason() {
 
 function applyTheme() {
   const body = document.body;
+  const root = document.documentElement;
   TIME_CLASSES.forEach(c => body.classList.remove(c));
   SEASON_CLASSES.forEach(c => body.classList.remove(c));
 
-  body.classList.add('season-' + (window.__debugSeason || detectSeason()));
+  const season = window.__debugSeason || detectSeason();
+  body.classList.add('season-' + season);
+
+  // Always compute & log auto time, even if manual override is active
+  const autoTime = detectTimeOfDay();
+
+  let override = null;
+  try { override = localStorage.getItem('bondar_theme_override'); } catch(e) {}
 
   let time;
   if (window.__debugTime) {
     time = window.__debugTime;
+    console.log('[Bondar theme] debug override →', time);
+  } else if (override === 'light') {
+    time = 'day';
+    console.log('[Bondar theme] manual override = light → forcing day (auto would be', autoTime + ')');
+  } else if (override === 'dark') {
+    time = 'night';
+    console.log('[Bondar theme] manual override = dark → forcing night (auto would be', autoTime + ')');
   } else {
-    let override = null;
-    try { override = localStorage.getItem('bondar_theme_override'); } catch(e) {}
-    if (override === 'light') time = 'day';
-    else if (override === 'dark') time = 'night';
-    else time = detectTimeOfDay();
+    time = autoTime;
   }
 
   body.classList.add('time-' + time);
+  root.setAttribute('data-theme', time);
+  body.setAttribute('data-theme', time);
 }
 
-document.getElementById('themeToggle').addEventListener('click', () => {
-  const isDark = document.body.classList.contains('time-night');
-  const next = isDark ? 'light' : 'dark';
-  try { localStorage.setItem('bondar_theme_override', next); } catch(e) {}
+const themeToggleBtn = document.getElementById('themeToggle');
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('time-night');
+    const next = isDark ? 'light' : 'dark';
+    try { localStorage.setItem('bondar_theme_override', next); } catch(e) {}
+    applyTheme();
+  });
+}
+
+// Apply on DOM ready (script is at end of body, so it runs immediately;
+// addEventListener is a safety net in case the script gets moved later).
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', applyTheme);
+} else {
   applyTheme();
-});
+}
 
-applyTheme();
-
-// Re-check time of day every 10 minutes (if no manual override)
+// Re-check every 60 seconds — picks up hour rollovers automatically.
+// Silent check (no log spam); applyTheme() logs only when actually re-applied.
+let __lastAutoTime = computeTimeSlot(new Date().getHours());
 setInterval(() => {
+  const currentAuto = computeTimeSlot(new Date().getHours());
+  if (currentAuto === __lastAutoTime) return;
+  __lastAutoTime = currentAuto;
   let override = null;
   try { override = localStorage.getItem('bondar_theme_override'); } catch(e) {}
   if (!override) applyTheme();
-}, 10 * 60 * 1000);
+}, 60 * 1000);
 
 // ===== Weather: geolocation + OpenWeatherMap + visual effects =====
 const WEATHER_API_KEY = 'd1c3aa6c1c355aa57c0242ac1e231802';

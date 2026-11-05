@@ -975,17 +975,14 @@
     gap: 18px;
   }
   .contact-avatar {
-    width: 56px; height: 56px;
-    background: var(--btn-bg);
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
+    object-fit: cover;
+    object-position: center 30%;
     flex-shrink: 0;
+    display: block;
+    border: 2px solid var(--green);
   }
   .contact-person-info { text-align: left; }
   .contact-person-name {
@@ -2414,7 +2411,14 @@
     <p class="contact-tip reveal" data-i18n="contact_tip">Tips: ta några bilder av ytan och mät upp den ungefärligt innan du hör av dig.</p>
 
     <div class="contact-person reveal">
-      <div class="contact-avatar" aria-hidden="true">D</div>
+      <img
+        src="images/daniel-bondar.png"
+        alt="Daniel Bondar"
+        class="contact-avatar"
+        width="80"
+        height="80"
+        loading="lazy"
+    >
       <div class="contact-person-info">
         <div class="contact-person-name">Daniel Bondar</div>
         <div class="contact-person-role" data-i18n="contact_role">Kontaktperson</div>
